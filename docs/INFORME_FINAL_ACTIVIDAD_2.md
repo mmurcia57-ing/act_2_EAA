@@ -20,6 +20,8 @@ Para clustering se usaron 36 variables numéricas estructurales, excluyendo `Id`
 
 Las variables con mayor relación observada con el precio fueron `OverallQual`, `GrLivArea`, `GarageCars`, `GarageArea`, `TotalBsmtSF` y `1stFlrSF`. También se observaron relaciones de redundancia o multicolinealidad entre `GarageCars/GarageArea`, `YearBuilt/GarageYrBlt`, `GrLivArea/TotRmsAbvGrd` y `TotalBsmtSF/1stFlrSF`. Estas relaciones ayudan a interpretar los modelos, pero no se convierten automáticamente en causalidad.
 
+El dataset contiene 43 variables categóricas. Entre las de mayor cardinalidad se encontraron `Neighborhood` con 25 categorías, `Exterior2nd` con 16, `Exterior1st` con 15, `Condition1` con 9 y `SaleType` con 9. También se identificaron variables muy concentradas en una sola categoría, como `Utilities`, `Street`, `Condition2` y `Heating`. Este análisis permitió identificar categorías poco frecuentes y anticipar la necesidad de una codificación robusta para variables categóricas.
+
 ## 4. Tratamiento de valores faltantes
 
 Se distinguió entre missing real y ausencia estructural. Por ejemplo, la ausencia de garaje o de una característica de sótano puede representar que esa estructura no existe, mientras que otros campos requieren imputación estadística. Las estrategias principales fueron: `LotFrontage` por mediana, `MasVnrArea` y `GarageYrBlt` con 0 cuando la ausencia representa inexistencia, `Electrical` por moda y categorías estructurales como `None`.
@@ -56,7 +58,7 @@ XGBoost utilizó 500 estimadores, profundidad máxima 3, learning rate 0.03, sub
 
 ### 5.5 Red neuronal MLP
 
-La MLP utilizó capas Dense de 128, 64 y 32 unidades, activación ReLU y salida lineal, con Adam y early stopping. Fue competitiva, pero obtuvo RMSE 29390.27 y R² 0.8874, ligeramente por debajo de Random Forest en este split.
+La MLP utilizó capas Dense de 128, 64 y 32 unidades, activación ReLU y salida lineal, con Adam y early stopping. Durante el entrenamiento, el error se propagó desde la salida hacia las capas anteriores mediante backpropagation, y el optimizador Adam utilizó los gradientes resultantes para actualizar los pesos de la red. Fue competitiva, pero obtuvo RMSE 29390.27 y R² 0.8874, ligeramente por debajo de Random Forest en este split.
 
 ### 5.6 Comparación final de regresión
 
@@ -136,7 +138,7 @@ En ambos métodos, 122 de 123 viviendas del grupo1 quedaron en el perfil bajo (9
 
 ## 8. Detección de anomalías con Isolation Forest
 
-Isolation Forest se entrenó con las 36 variables estructurales imputadas, sin `SalePrice` ni `Id` y sin escalado en el modelo principal. Con 300 estimadores y `contamination="auto"`, detectó 70 anomalías de 1460 viviendas (4.79%). Las variables diferenciadoras principales fueron `GrLivArea`, `TotRmsAbvGrd`, `KitchenAbvGr`, `LotArea`, `1stFlrSF`, `2ndFlrSF`, `TotalBsmtSF`, `LowQualFinSF`, `FullBath` y `BedroomAbvGr`.
+Isolation Forest se entrenó con las 36 variables estructurales imputadas, sin `SalePrice` ni `Id` y sin escalado en el modelo principal. Con 300 estimadores y `contamination="auto"`, marcó 70 observaciones como anómalas bajo la configuración utilizada, equivalentes al 4.79% de las viviendas. Las variables diferenciadoras principales fueron `GrLivArea`, `TotRmsAbvGrd`, `KitchenAbvGr`, `LotArea`, `1stFlrSF`, `2ndFlrSF`, `TotalBsmtSF`, `LowQualFinSF`, `FullBath` y `BedroomAbvGr`.
 
 Las anomalías presentaron media de `GrLivArea` 2428.74 frente a 1469.47 en casos normales y media de `LotArea` 24131.31 frente a 9831.21. Su `SalePrice` medio fue 265004.71, frente a 176686.77 en normales; esta diferencia solo describe una asociación posterior. Una anomalía no es sinónimo de error ni de fraude.
 
@@ -180,10 +182,16 @@ Los métodos no supervisados permitieron descubrir perfiles estructurales y dete
 
 Q-learning ilustró cómo una recompensa explícita produce una política eficiente en un entorno discreto. La reflexión sobre RLHF contrastó esa recompensa programada con señales derivadas de preferencias humanas y mostró que una señal aprendida también puede contener sesgos o ser sobreoptimizada.
 
-La elección final debe depender del problema: XGBoost para minimizar error de regresión y maximizar accuracy de clasificación; SVM lineal C=1 cuando el equilibrio entre clases sea prioritario; K-Means para una segmentación operativa simple; y Isolation Forest como alerta exploratoria de casos raros.
+La elección final debe depender del problema: XGBoost para minimizar error de regresión y maximizar accuracy de clasificación; SVM lineal C=1 cuando el equilibrio entre clases sea prioritario; K-Means para una segmentación operativa simple; y Isolation Forest como alerta exploratoria de casos raros. Bajo los datos, la partición y las configuraciones evaluadas, XGBoost fue la alternativa con menor error de regresión y mayor accuracy de clasificación, mientras que SVM lineal con C=1 mostró el comportamiento más equilibrado entre clases.
 
 ## 13. Referencias
 
-El informe utiliza como fuentes internas la guía paso a paso, el README y los artefactos versionados del repositorio. No se agregan referencias bibliográficas externas no presentes en la actividad. Referencia bibliográfica académica pendiente: **[TBD - completar referencia bibliográfica]**.
+El informe utiliza como fuentes internas la guía paso a paso, el README y los artefactos versionados del repositorio. Las referencias se presentan de forma descriptiva porque el proyecto no conserva metadata bibliográfica completa:
+
+- Kaggle. *USA Housing Dataset*. Fuente del conjunto de datos utilizado.
+- Scikit-learn documentation. Referencia técnica para árboles, Random Forest, SVM, K-Means, clustering jerárquico e Isolation Forest.
+- XGBoost documentation. Referencia técnica para modelos de boosting.
+- TensorFlow/Keras documentation. Referencia técnica para la red neuronal MLP.
+- Material académico y guía de la Actividad 2.
 
 Los scripts oficiales y las tablas, métricas y figuras completas se encuentran versionados en el repositorio. El notebook `notebooks/Actividad2_Evidencia_Final.ipynb` permite revisar los principales outputs sin reentrenar todos los modelos.
