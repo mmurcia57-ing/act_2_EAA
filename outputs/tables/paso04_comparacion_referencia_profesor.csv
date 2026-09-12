@@ -1,0 +1,3 @@
+metrica,valor_dataset,valor_referencia_profesor,coincide,comentario
+Neighborhood categorías,25,25,True,coincide con la referencia
+Street categorías,2,2,True,coincide con la referencia

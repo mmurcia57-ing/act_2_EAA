@@ -1,0 +1,4 @@
+variable,n_categorias,missing_count,missing_pct,comentario
+Neighborhood,25,0,0.0,alta cardinalidad preliminar; OneHotEncoder puede aumentar la dimensionalidad
+Exterior2nd,16,0,0.0,alta cardinalidad preliminar; OneHotEncoder puede aumentar la dimensionalidad
+Exterior1st,15,0,0.0,alta cardinalidad preliminar; OneHotEncoder puede aumentar la dimensionalidad

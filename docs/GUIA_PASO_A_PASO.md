@@ -66,3 +66,20 @@ Si se tienen 1460 observaciones, constituyen una muestra suficiente para el labo
 Sí, podríamos eliminar algunas variables, pero existen únicamente candidatas preliminares y todavía no se elimina ninguna. `Id` se excluye del modelado por ser identificador. Las variables con casi todos sus valores en cero podrían eliminarse o transformarse en indicadores binarios. La decisión definitiva debe considerar también correlaciones, missing y desempeño predictivo, además de completar la preparación del modelado.
 
 La guía del profesor coincide aproximadamente con el dataset: `SalePrice` tiene mínimo 34900, mediana 163000, media 180921.20 y máximo 755000; `LotFrontage`, `MasVnrArea` y `GarageYrBlt` tienen respectivamente 259, 8 y 81 missing. No se forzaron coincidencias ni se alteraron los datos.
+## Paso 04 - Variables categóricas y frecuencias
+
+### Objetivo y resultados
+
+Se identificaron automáticamente 43 variables categóricas y se calcularon sus frecuencias absolutas y relativas, cardinalidad y missing, sin imputar, eliminar columnas ni aplicar encoding.
+
+Las variables de mayor cardinalidad son `Neighborhood` (25 categorías), `Exterior2nd` (16) y `Exterior1st` (15), seguidas por `Condition1` y `SaleType` (9 cada una). `Neighborhood` está encabezada por `NAmes` (225), `CollgCr` (150), `OldTown` (113), `Edwards` (100) y `Somerst` (86). `Street` tiene `Pave` (1454) y `Grvl` (6).
+
+Se identificaron 11 variables dominadas por una categoría con al menos 90%; entre las más marcadas están `Utilities`/`AllPub` (99.93%), `Street`/`Pave` (99.59%), `Condition2`/`Norm` (98.97%), `RoofMatl`/`CompShg` (98.22%) y `Heating`/`GasA` (97.81%). También se encontraron categorías raras en 31 variables; se identificaron, pero todavía no se agrupan.
+
+Hay 16 variables categóricas con missing. Los porcentajes más altos están en `PoolQC` (99.52%), `MiscFeature` (96.30%), `Alley` (93.77%), `Fence` (80.75%) y `MasVnrType` (59.73%). Se marcaron como `por_revisar`, porque un missing puede ser estructural o un dato faltante y no se debe afirmar su significado sin revisar la semántica de cada variable.
+
+### Respuesta académica
+
+Las variables categóricas muestran que algunas tienen pocas categorías, mientras otras, como `Neighborhood`, tienen muchas. Algunas están fuertemente dominadas por una sola categoría y otras presentan niveles muy poco frecuentes. Varias tienen missing que puede ser estructural. Estas características condicionarán el preprocesamiento: las categóricas deberán codificarse antes de entrenar modelos en Python/scikit-learn y OneHotEncoder puede aumentar considerablemente la dimensionalidad cuando hay alta cardinalidad.
+
+No se agrupan categorías raras ni se eliminan variables todavía: primero debe revisarse su significado y su aporte junto con missing, correlaciones y desempeño predictivo. La comparación con la referencia del profesor coincide: `Neighborhood` tiene 25 categorías y `Street` tiene 2.

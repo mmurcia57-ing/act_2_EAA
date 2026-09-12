@@ -1,0 +1,8 @@
+variable,n_categorias,top_categoria,top_frecuencia,top_porcentaje,missing_count
+Neighborhood,25,NAmes,225,15.41095890410959,0
+Exterior2nd,16,VinylSd,504,34.52054794520548,0
+Exterior1st,15,VinylSd,515,35.273972602739725,0
+SaleType,9,WD,1267,86.78082191780821,0
+HouseStyle,8,1Story,726,49.726027397260275,0
+MSZoning,5,RL,1151,78.83561643835615,0
+Street,2,Pave,1454,99.58904109589041,0

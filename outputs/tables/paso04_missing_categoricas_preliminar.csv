@@ -1,0 +1,17 @@
+variable,missing_count,missing_pct,interpretacion_preliminar,tipo_missing_preliminar
+BsmtFinType2,38,2.6027397260273974,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+BsmtFinType1,37,2.5342465753424657,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+GarageType,81,5.5479452054794525,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+GarageCond,81,5.5479452054794525,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+GarageQual,81,5.5479452054794525,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+Electrical,1,0.0684931506849315,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+FireplaceQu,690,47.26027397260274,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+MiscFeature,1406,96.30136986301369,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+Fence,1179,80.75342465753424,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+BsmtCond,37,2.5342465753424657,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+BsmtExposure,38,2.6027397260273974,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+BsmtQual,37,2.5342465753424657,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+PoolQC,1453,99.52054794520548,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+GarageFinish,81,5.5479452054794525,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+MasVnrType,872,59.726027397260275,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar
+Alley,1369,93.76712328767123,missing identificado; revisar semántica antes de decidir tratamiento,por_revisar

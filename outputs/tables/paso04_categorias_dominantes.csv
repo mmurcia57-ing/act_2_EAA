@@ -1,0 +1,12 @@
+variable,categoria_dominante,frecuencia,porcentaje,decision_preliminar,justificacion
+RoofMatl,CompShg,1434,98.21917808219179,revisar,poca variabilidad aparente; no eliminar automáticamente
+Condition2,Norm,1445,98.97260273972603,revisar,poca variabilidad aparente; no eliminar automáticamente
+Functional,Typ,1360,93.15068493150685,revisar,poca variabilidad aparente; no eliminar automáticamente
+Heating,GasA,1428,97.80821917808218,revisar,poca variabilidad aparente; no eliminar automáticamente
+GarageCond,TA,1326,90.82191780821918,revisar,poca variabilidad aparente; no eliminar automáticamente
+Electrical,SBrkr,1334,91.36986301369862,revisar,poca variabilidad aparente; no eliminar automáticamente
+LandSlope,Gtl,1382,94.65753424657535,revisar,poca variabilidad aparente; no eliminar automáticamente
+PavedDrive,Y,1340,91.78082191780823,revisar,poca variabilidad aparente; no eliminar automáticamente
+Utilities,AllPub,1459,99.93150684931507,revisar,poca variabilidad aparente; no eliminar automáticamente
+Street,Pave,1454,99.58904109589041,revisar,poca variabilidad aparente; no eliminar automáticamente
+CentralAir,Y,1365,93.4931506849315,revisar,poca variabilidad aparente; no eliminar automáticamente
