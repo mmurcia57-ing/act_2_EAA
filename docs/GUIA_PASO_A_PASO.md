@@ -192,3 +192,24 @@ Las diez importancias transformadas principales fueron `OverallQual`, `GrLivArea
 El Random Forest combina múltiples árboles, cada uno entrenado con bootstrap y con subconjuntos aleatorios de variables en las divisiones. Al promediar, reduce la varianza y la sensibilidad de un árbol individual a pequeñas variaciones del dataset. En nuestros resultados, el RMSE fue 28929.45, mejor que 42453.07 del árbol sin poda y 40386.27 del árbol podado, con mejoras de 31.86% y 28.37%, respectivamente.
 
 La referencia del profesor es 27588.9; nuestro valor es 1340.55 mayor, una diferencia de 4.86%. No debe concluirse que Random Forest siempre es mejor ni que la diferencia sea un error: pueden cambiar el split, la implementación, el encoding, el tratamiento de missing, los parámetros y las versiones. El gap train-test de 17865.47 muestra cierta diferencia de generalización, aunque menor que el sobreajuste extremo del árbol sin poda. Boosting todavía no se ha ejecutado.
+## Paso 10 - XGBoost para regresión
+
+### Metodología y configuración
+
+Gradient boosting construye árboles secuencialmente: cada árbol nuevo intenta corregir los errores de los anteriores. Esto contrasta con Random Forest, que construye árboles principalmente en paralelo sobre muestras bootstrap y subconjuntos aleatorios de variables, y después promedia sus predicciones. `learning_rate` controla cuánto aporta cada árbol, `n_estimators` define cuántos árboles se construyen, `max_depth` limita la profundidad y `subsample` y `colsample_bytree` introducen aleatoriedad usando fracciones de observaciones y variables.
+
+Se mantuvo el split externo 1168/292, se excluyeron `SalePrice` e `Id`, y el preprocesamiento se ajustó únicamente dentro del pipeline sobre train. Las variables numéricas usan mediana; las categóricas usan `None` y `OneHotEncoder(handle_unknown="ignore")`. La configuración fue `XGBRegressor(n_estimators=500, max_depth=3, learning_rate=0.03, subsample=0.8, colsample_bytree=0.8, objective="reg:squarederror", random_state=42, n_jobs=-1)`, con XGBoost 3.4.1.
+
+### Resultados
+
+XGBoost obtuvo en train MAE 8697.48, RMSE 11960.51 y R² 0.9760. En test obtuvo MAE 15852.43, RMSE 25564.80 y R² 0.9148. El gap RMSE train-test fue 13604.29, menor que el de Random Forest (17865.47), aunque todavía existe diferencia entre entrenamiento y prueba y debe interpretarse con prudencia.
+
+Frente al árbol sin poda, XGBoost mejoró el RMSE en 16888.27 (39.78%); frente al árbol podado, en 14821.47 (36.70%); y frente a Random Forest, en 3364.65 (11.63%). Comparado con la referencia del profesor (27588.9), el RMSE fue 2024.10 mayor (7.34%). Las diferencias pueden deberse al split, R/Python, encoding, tratamiento de missing, parámetros y versiones de librerías; no se forzó coincidencia.
+
+Las principales importancias transformadas fueron `OverallQual`, `ExterQual_TA`, `GarageCars`, `BsmtQual_Ex`, `FullBath`, `FireplaceQu_None`, `GarageType_Attchd`, `GrLivArea`, `KitchenQual_Ex` y `GarageFinish_Unf`. La tabla agregada suma los niveles one-hot por variable original y muestra como principales `OverallQual`, `ExterQual`, `GarageCars`, `KitchenQual`, `BsmtQual`, `GarageType`, `FullBath`, `CentralAir`, `Neighborhood` y `FireplaceQu`. Las importancias no implican causalidad y las categóricas aparecen descompuestas por nivel en la tabla no agregada.
+
+### Respuesta académica
+
+El modelo de gradient boosting obtuvo un RMSE de 25564.80. Frente al árbol sin poda (42453.07), representa una mejora de 39.78%; frente al árbol podado (40386.27), una mejora de 36.70%; y frente a Random Forest (28929.45), una mejora de 11.63%.
+
+La diferencia conceptual principal es que Random Forest construye múltiples árboles diversificados y promedia sus resultados, mientras que XGBoost construye árboles secuencialmente para corregir los residuos de los modelos anteriores. En este experimento XGBoost obtuvo el menor RMSE, pero no debe afirmarse que siempre sea mejor: su desempeño depende de la configuración, los datos y la validación. El gap train-test de 13604.29 indica una diferencia de generalización que debe vigilarse, aunque es menor que la de Random Forest. MLP queda pendiente para el Paso 11.

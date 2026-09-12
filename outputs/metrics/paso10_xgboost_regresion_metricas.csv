@@ -1,0 +1,2 @@
+modelo,n_estimators,max_depth,learning_rate,subsample,colsample_bytree,n_train,n_test,mae_train,rmse_train,r2_train,mae_test,rmse_test,r2_test,train_seconds,random_state,xgboost_version
+XGBRegressor,500,3,0.03,0.8,0.8,1168,292,8697.4814453125,11960.506343796655,0.9760159850120544,15852.43359375,25564.798297659225,0.914793848991394,1.2771763999480754,42,3.4.1

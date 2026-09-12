@@ -1,0 +1,4 @@
+comparacion,delta_rmse,delta_rmse_pct
+xgboost_vs_arbol_sin_poda,-16888.271702340775,-39.7810375135197
+xgboost_vs_arbol_podado,-14821.471702340772,-36.69928345039236
+xgboost_vs_random_forest,-3364.651702340776,-11.630541549669198

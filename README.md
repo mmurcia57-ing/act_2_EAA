@@ -38,3 +38,6 @@ Se evaluó la poda del árbol de regresión y se comparó contra el baseline y l
 ## Paso 09
 
 Se evaluó Random Forest para regresión y se completó la comparación con los árboles. Boosting todavía no se ha ejecutado.
+## Paso 10
+
+Se evaluó XGBoost para regresión y se completó la comparación con árboles y Random Forest. MLP todavía está pendiente.
