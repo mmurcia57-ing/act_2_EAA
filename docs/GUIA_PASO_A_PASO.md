@@ -106,3 +106,26 @@ Sí, se puede considerar eliminar alguna columna o simplificar grupos de variabl
 La correlación no implica causalidad y puede estar afectada por relaciones no lineales, valores atípicos y datos faltantes. Por ello, estos resultados son una guía exploratoria: `GarageCars`/`GarageArea`, `TotalBsmtSF`/`1stFlrSF`, `YearBuilt`/`GarageYrBlt` y `GrLivArea`/`TotRmsAbvGrd` son candidatos preliminares a revisar, no variables eliminadas.
 
 La comparación conceptual coincide con la referencia del profesor: `OverallQual` y `GrLivArea` aparecen entre las variables más relacionadas con `SalePrice`, y los cuatro pares de referencia muestran correlaciones altas o relevantes.
+## Paso 06 - Tratamiento de valores faltantes
+
+### Estrategia aplicada
+
+Se detectaron 19 columnas con 7829 valores missing. Se distinguió entre missing real, cuando el dato debería existir pero no fue registrado, y missing estructural, cuando la característica no existe o no aplica. La imputación se aplicó únicamente sobre `df_original.copy()` y el CSV original permaneció intacto.
+
+Para el missing real numérico `LotFrontage` se utilizó la mediana calculada del dataset (69.0), por ser robusta frente a outliers. `Electrical`, con un solo missing y sin significado estructural, se imputó con su moda real (`SBrkr`).
+
+Para variables numéricas estructurales, `MasVnrArea` se imputó con 0: su mediana es 0 y 859 de los 864 casos comparables con `MasVnrType` missing tienen área 0. `GarageYrBlt` se imputó con 0 cuando faltaba; 0 no representa un año real, sino “sin garaje / no aplica”. No se imputó con `YearBuilt`.
+
+Los missing estructurales de `Alley`, variables de sótano (`BsmtQual`, `BsmtCond`, `BsmtExposure`, `BsmtFinType1`, `BsmtFinType2`), `FireplaceQu`, variables de garaje (`GarageType`, `GarageFinish`, `GarageQual`, `GarageCond`), `PoolQC`, `Fence` y `MiscFeature` se reemplazaron por la categoría explícita `None`. En `MasVnrType` se eligió también `None`, porque la evidencia disponible sugiere ausencia de revestimiento. No se eliminaron `PoolQC`, `MiscFeature`, `Alley`, `Fence`, `MasVnrType` ni `FireplaceQu`.
+
+### Diagnóstico y consistencia
+
+`MasVnrType` tiene 872 missing (59.73%); 859 coinciden con `MasVnrArea == 0` y 5 con `MasVnrArea > 0` entre los casos comparables. Los 8 casos restantes tienen `MasVnrArea` missing. La discrepancia frente a la referencia complementaria del profesor se conserva y se documenta, sin alterar los datos.
+
+Las reglas estructurales no detectaron inconsistencias: `GarageType == None` fue coherente con `GarageYrBlt == 0` en 81 de 81 casos; `BsmtQual == None` fue compatible con las variables numéricas de sótano en 37 de 37; y `PoolQC == None` fue coherente con `PoolArea == 0` en 1453 de 1453. Después del tratamiento quedaron 0 valores missing y el dataset derivado conserva shape `(1460, 81)`.
+
+### Respuesta académica
+
+La mejor manera de llenar los valores faltantes depende de su significado. Para missing reales, los numéricos pueden imputarse con la mediana cuando sea adecuada y los categóricos con la moda si son pocos y no representan ausencia estructural. Para missing estructurales conviene crear la categoría explícita `None`; en variables numéricas asociadas a ausencia, usar 0 cuando tenga sentido semántico.
+
+Imputar la moda indiscriminadamente sería incorrecto: asignar a una vivienda sin garaje el tipo de garaje más frecuente inventaría una característica inexistente. Por eso se conservaron las variables y se distinguió la ausencia de un dato no registrado. Todavía no se realiza encoding ni modelado.

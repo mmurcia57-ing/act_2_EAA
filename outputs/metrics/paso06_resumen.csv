@@ -1,0 +1,2 @@
+filas,columnas,columnas_con_missing_antes,total_missing_antes,columnas_con_missing_despues,total_missing_despues,n_imputaciones_mediana,n_imputaciones_moda,n_imputaciones_cero,n_imputaciones_none,n_imputaciones_unknown
+1460,81,19,7829,0,0,259,1,89,7480,0

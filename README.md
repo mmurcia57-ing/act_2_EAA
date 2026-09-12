@@ -26,3 +26,6 @@ Se completó el análisis categórico y de frecuencias. Aún no se realiza encod
 ## Paso 05
 
 Se calcularon las correlaciones numéricas y se documentó la redundancia preliminar. Todavía no se eliminan variables; el siguiente paso será el tratamiento de missing.
+## Paso 06
+
+Se trataron los missing y está disponible el dataset derivado imputado en `outputs/tables/housing_train_imputado.csv`. El dataset original fue preservado; todavía no se ha realizado encoding ni modelado.

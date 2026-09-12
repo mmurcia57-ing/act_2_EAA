@@ -1,0 +1,4 @@
+regla,casos_evaluados,casos_consistentes,casos_inconsistentes,comentario
+GarageType == None implica GarageYrBlt == 0,81,81,0,solo se reportan inconsistencias; no se corrigen automáticamente
+BsmtQual == None compatible con variables numéricas de sótano en 0,37,37,0,se revisan variables numéricas asociadas; no se corrigen automáticamente
+PoolQC == None implica PoolArea == 0,1453,1453,0,solo se reportan inconsistencias; no se corrigen automáticamente

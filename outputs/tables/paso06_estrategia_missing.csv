@@ -1,0 +1,20 @@
+variable,tipo_variable,missing_count,missing_pct,tipo_missing,estrategia,valor_imputacion,justificacion
+PoolQC,categorica,1453,99.52054794520548,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+MiscFeature,categorica,1406,96.30136986301369,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+Alley,categorica,1369,93.76712328767123,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+Fence,categorica,1179,80.75342465753424,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+MasVnrType,categorica,872,59.726027397260275,estructural_posible,none,None,859 de 864 casos comparables tienen MasVnrArea igual a 0
+FireplaceQu,categorica,690,47.26027397260274,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+LotFrontage,numerica,259,17.73972602739726,dato_faltante_real,mediana,69.0,variable numérica real; la mediana es robusta frente a outliers
+GarageType,categorica,81,5.5479452054794525,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+GarageYrBlt,numerica,81,5.5479452054794525,estructural_posible,cero,0,0 representa sin garaje/no aplica; no es un año real
+GarageFinish,categorica,81,5.5479452054794525,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+GarageQual,categorica,81,5.5479452054794525,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+GarageCond,categorica,81,5.5479452054794525,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+BsmtExposure,categorica,38,2.6027397260273974,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+BsmtFinType2,categorica,38,2.6027397260273974,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+BsmtQual,categorica,37,2.5342465753424657,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+BsmtCond,categorica,37,2.5342465753424657,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+BsmtFinType1,categorica,37,2.5342465753424657,estructural_posible,none,None,NA puede representar que la característica no existe o no aplica
+MasVnrArea,numerica,8,0.547945205479452,estructural_posible,cero,0,la mediana es 0 y los ceros representan ausencia de revestimiento
+Electrical,categorica,1,0.0684931506849315,dato_faltante_real,moda,SBrkr,muy pocos casos y no representa ausencia estructural

@@ -1,0 +1,8 @@
+variable,missing_dataset,estrategia_dataset,referencia_profesor,coincide,comentario
+LotFrontage,259,mediana,259 missing; mediana,True,coincide
+MasVnrArea,8,0,8 missing; tratamiento cercano a 0,True,"el tratamiento coincide, pero el conteo real difiere de la referencia"
+GarageYrBlt,81,0 estructural,81 missing; estructural,True,coincide
+BsmtQual,37,None,missing estructural,True,coincide
+GarageType,81,None,missing estructural,True,coincide
+Electrical,1,moda,muy pocos casos; moda,True,coincide
+MasVnrType,872,None,la guía complementaria reporta pocos missing,False,se conserva el comportamiento observado en el dataset descargado y no se alteran los datos para reproducir artificialmente la referencia
