@@ -311,3 +311,40 @@ La exactitud por grupo se calcula como aciertos de la fila entre el total real d
 La conclusión principal es que la accuracy global de 91.44% está dominada por grupo2, que representa 90.75% del test, y oculta el mal desempeño de grupo3. Por eso se deben revisar matriz de confusión, precision, recall, F1 y balanced accuracy, no solo accuracy.
 
 Grupo3 tiene únicamente 2 casos en test y 7 en train, por lo que no es posible aprender un patrón robusto con suficiente confianza. Para pasos posteriores podrían considerarse aumentar ejemplos, `class_weight`, sobremuestreo solo en train, SMOTE con cuidado, revisar los límites si el contexto de negocio lo permite y evaluar siempre métricas por clase. Estas técnicas no se aplicaron en este paso.
+## Paso 15 - Random Forest para clasificación
+
+### Metodología
+
+Se entrenó un `RandomForestClassifier(n_estimators=300, random_state=42, n_jobs=-1)` para predecir `PriceGroup`. Se reutilizó exactamente el split del Paso 13: 1168 registros de train y 292 de test, con distribución test 25/265/2. `SalePrice`, `PriceGroup` e `Id` se excluyeron de `X`, y el preprocesamiento se ajustó exclusivamente con train mediante imputación y `OneHotEncoder`.
+
+Random Forest combina árboles construidos con muestras bootstrap y subconjuntos aleatorios de variables. Frente a un árbol individual, el ensamble suele reducir la varianza, aunque no garantiza mejorar todas las métricas ni resolver por sí mismo el desbalance.
+
+### Resultados y comparación con el árbol
+
+Random Forest obtuvo accuracy 0.9418, balanced accuracy 0.4908 y macro F1 0.5280 en test. El árbol del Paso 14 obtuvo respectivamente 0.9144, 0.5170 y 0.5063. Por tanto, Random Forest mejoró accuracy en 0.0274 y macro F1 en 0.0218, pero redujo balanced accuracy en 0.0262.
+
+La matriz de confusión de Random Forest fue:
+
+| Real / predicho | grupo1 | grupo2 | grupo3 |
+|---|---:|---:|---:|
+| grupo1 | 12 | 13 | 0 |
+| grupo2 | 2 | 263 | 0 |
+| grupo3 | 0 | 2 | 0 |
+
+Por grupo, grupo1 tuvo soporte 25, 12 aciertos y recall 0.48; grupo2 tuvo soporte 265, 263 aciertos y recall 0.9925; grupo3 tuvo soporte 2, 0 aciertos y recall 0. La “exactitud por grupo” corresponde al recall de cada clase: aciertos de la fila divididos entre su soporte real.
+
+El árbol tenía recalls 0.60, 0.9509 y 0 para grupo1, grupo2 y grupo3. El ensamble mejoró grupo2, empeoró grupo1 y no cambió grupo3. La accuracy elevada está dominada por grupo2, que representa aproximadamente el 91% del test; por eso deben priorizarse balanced accuracy, macro F1 y recall por grupo.
+
+### Comparación con el profesor y grupo3
+
+La referencia del profesor usa soportes ligeramente distintos: grupo1=24, grupo2=266 y grupo3=2. En nuestro split, los soportes son 25, 265 y 2 y no se modificaron. El profesor reporta recalls de 54.17%, 99.62% y 50%; nuestro modelo obtuvo 48%, 99.25% y 0%, respectivamente. La comparación de grupo3 no debe generalizarse: hay solo 7 ejemplos en train y 2 en test, de modo que una observación cambia el recall en 50 puntos porcentuales.
+
+El modelo alcanzó accuracy train 1.0 frente a 0.9418 en test, lo que sugiere posible sobreajuste y debe analizarse junto con las métricas por clase. No se aplicaron `class_weight`, SMOTE, oversampling ni tuning. Para grupo3 podrían considerarse aumentar ejemplos, ponderación de clases, sobremuestreo solo en train, SMOTE con cuidado, revisar límites si el negocio lo permite y evaluar siempre métricas por clase. Estas técnicas quedan para pasos posteriores.
+
+Las importancias principales fueron `GrLivArea`, `TotalBsmtSF`, `1stFlrSF`, `GarageArea`, `OverallQual`, `LotArea`, `YearRemodAdd`, `OverallCond`, `LotFrontage` y `YearBuilt`. Las categóricas codificadas aparecen descompuestas por nivel; la importancia no implica causalidad.
+
+### Respuesta académica
+
+Random Forest mejoró la accuracy y el macro F1 respecto al árbol, pero no la balanced accuracy. El ensamble concentró aún más su buen desempeño en grupo2: el recall pasó a 99.25%, mientras grupo1 bajó a 48% y grupo3 permaneció en 0%. Por ello, no basta con observar la accuracy global; la clasificación sigue limitada por el fuerte desbalance.
+
+Comparado con el árbol de decisión, Random Forest es más robusto frente a variaciones del dataset y reduce varianza al promediar muchos árboles, pero puede ser menos interpretable. En este experimento obtuvo mejor accuracy y macro F1, pero peor balanced accuracy, y no resolvió la clase extremadamente minoritaria. No se balancearon las clases todavía.

@@ -53,3 +53,6 @@ Se inició el bloque de clasificación: se crearon los grupos de precio y se def
 ## Paso 14
 
 Se evaluó el árbol de clasificación y se generó la matriz de confusión. El siguiente modelo será Random Forest.
+## Paso 15
+
+Se evaluó Random Forest para clasificación y se comparó con el árbol. El siguiente clasificador será Boosting.

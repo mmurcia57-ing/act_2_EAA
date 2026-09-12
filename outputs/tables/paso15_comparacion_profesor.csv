@@ -1,0 +1,4 @@
+grupo,soporte_dataset,soporte_profesor,aciertos_dataset,recall_dataset,aciertos_profesor,recall_profesor,comentario
+grupo1,25,24,12,0.48,13,0.5416666666666666,comparacion documentada sin cambiar el split
+grupo2,265,266,263,0.9924528301886792,265,0.9962406015037594,comparacion documentada sin cambiar el split
+grupo3,2,2,0,0.0,1,0.5,splits distintos; grupo3 tiene solo 2 casos y no debe generalizarse

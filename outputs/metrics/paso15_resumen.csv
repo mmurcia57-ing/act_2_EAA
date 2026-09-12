@@ -1,0 +1,2 @@
+accuracy,balanced_accuracy,macro_f1,grupo1_recall,grupo2_recall,grupo3_recall,grupo1_support,grupo2_support,grupo3_support,train_accuracy,test_accuracy,gap_accuracy,delta_accuracy_vs_tree,delta_balanced_accuracy_vs_tree,delta_macro_f1_vs_tree,n_estimators,train_seconds
+0.9417808219178082,0.4908176100628931,0.5280256882466827,0.48,0.9924528301886792,0.0,25,265,2,1.0,0.9417808219178082,0.05821917808219179,0.0273972602739726,-0.0261635220125786,0.02176610269901358,300,1.0575878000818193
