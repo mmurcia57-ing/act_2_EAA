@@ -1,0 +1,2 @@
+best_kernel,best_C,best_accuracy,best_balanced_accuracy,best_macro_f1,best_grupo1_recall,best_grupo2_recall,best_grupo3_recall,best_train_seconds,best_train_accuracy,best_test_accuracy
+linear,1.0,0.9486301369863014,0.7915723270440251,0.8015141821283857,0.92,0.9547169811320755,0.5,0.152364999987185,0.9940068493150684,0.9486301369863014

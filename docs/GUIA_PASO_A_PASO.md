@@ -380,3 +380,30 @@ XGBoost no detectó grupo3. Como solo hay 7 casos de grupo3 en train y 2 en test
 ### Respuesta académica
 
 Se repitió el ejercicio aplicando boosting mediante XGBClassifier multiclase. Con la configuración indicada obtuvo accuracy 0.9623, balanced accuracy 0.5829, macro F1 0.5960 y recalls de 0.7600, 0.9887 y 0.0000 para grupos 1, 2 y 3. En este split superó al árbol y a Random Forest en las tres métricas globales comparadas, pero no resolvió grupo3; la conclusión debe limitarse a este split y a sus soportes, especialmente los 2 casos de grupo3 en test.
+
+## Paso 17 - SVM lineal y RBF para clasificación
+
+SVM busca una frontera que separe las clases maximizando el margen, es decir, la distancia entre la frontera y los ejemplos más cercanos. El parámetro `C` controla el compromiso entre margen amplio y errores de entrenamiento: un C bajo regulariza más y tolera más errores, mientras un C alto penaliza más los errores y puede sobreajustar.
+
+Se reutilizó el split fijo del Paso 13 (1168 train y 292 test; grupo1=25, grupo2=265 y grupo3=2 en test). El pipeline imputó numéricas con mediana y las estandarizó, e imputó categóricas con `None` antes de aplicar one-hot encoding. Todo el preprocesamiento se ajustó solamente en train. Se evaluaron SVC sin pesos de clase para `kernel=linear` y `kernel=rbf`, con C=0.1, 1 y 10.
+
+El kernel lineal aprende una frontera lineal en el espacio transformado. El kernel RBF permite fronteras no lineales mediante una medida de similitud radial. Los resultados completos de las seis configuraciones están en `outputs/tables/paso17_svm_resultados.csv`, junto con recall por grupo y matrices de confusión individuales.
+
+La selección se hizo por balanced accuracy, luego macro F1, recall de grupo1 y finalmente menor tiempo. En este experimento, la configuración seleccionada y sus métricas, así como la comparación con árbol, Random Forest y XGBoost, están en `outputs/metrics/paso17_mejor_svm.csv` y `outputs/tables/paso17_comparacion_clasificadores.csv`. La variación de C debe leerse junto con balanced accuracy y macro F1, no únicamente con accuracy.
+
+El desbalance continúa siendo determinante: grupo2 es aproximadamente el 91% del dataset, por lo que accuracy puede ocultar fallos en las clases minoritarias. Grupo3 tiene solo 7 observaciones en train y 2 en test; sus posibles recalls en test son 0%, 50% o 100%, así que cualquier resultado debe interpretarse con cautela. Las conclusiones están limitadas por ese soporte reducido, el split único y la ausencia de balanceo o ajuste exhaustivo.
+
+### Respuesta académica
+
+Se entrenaron seis SVM multiclase: tres con kernel lineal y C=0.1, 1 y 10, y tres con kernel RBF y los mismos valores de C. La tabla de resultados permite comparar accuracy, balanced accuracy, macro F1 y recalls por grupo. El mejor modelo se seleccionó priorizando balanced accuracy; el efecto de C se evaluó observando cómo cambian las métricas al pasar de regularización alta a baja, y el efecto del kernel comparando las fronteras lineales y no lineales bajo el mismo split. La interpretación debe priorizar balanced accuracy, macro F1 y recall por clase debido al desbalance, especialmente para grupo3.
+
+| Kernel | C | Accuracy | Balanced accuracy | Macro F1 |
+|---|---:|---:|---:|---:|
+| linear | 0.1 | 0.9692 | 0.6216 | 0.6153 |
+| linear | 1 | 0.9486 | 0.7916 | 0.8015 |
+| linear | 10 | 0.9212 | 0.7574 | 0.7595 |
+| rbf | 0.1 | 0.9075 | 0.3333 | 0.3172 |
+| rbf | 1 | 0.9658 | 0.5962 | 0.6049 |
+| rbf | 10 | 0.9692 | 0.6096 | 0.6134 |
+
+El mejor balanced accuracy fue el SVM lineal con C=1 (0.7916). En el kernel lineal, aumentar C de 0.1 a 1 redujo accuracy pero elevó claramente balanced accuracy y macro F1; al pasar a C=10, ambas métricas de equidad descendieron. En RBF, C=0.1 produjo bajo desempeño, mientras C=1 y C=10 lo mejoraron, aunque sin alcanzar al lineal con C=1. Así, en este split el kernel lineal rindió mejor según la métrica prioritaria. El SVM superó al árbol, Random Forest y XGBoost en balanced accuracy y macro F1, pero no en accuracy global frente a XGBoost.

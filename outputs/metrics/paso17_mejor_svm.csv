@@ -1,0 +1,2 @@
+kernel,C,accuracy,balanced_accuracy,macro_f1,grupo1_recall,grupo2_recall,grupo3_recall,train_seconds
+linear,1.0,0.9486301369863014,0.7915723270440251,0.8015141821283857,0.92,0.9547169811320755,0.5,0.152364999987185

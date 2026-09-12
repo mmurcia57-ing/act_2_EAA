@@ -60,3 +60,7 @@ Se evaluó Random Forest para clasificación y se comparó con el árbol. El sig
 ## Paso 16
 
 Se ejecutó XGBoost para clasificación multiclase y se comparó con árbol y Random Forest. El siguiente paso será SVM.
+
+## Paso 17
+
+Se evaluaron SVM lineal y RBF con C=0.1, 1 y 10. El siguiente paso será el cierre comparativo de clasificación.
