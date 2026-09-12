@@ -50,3 +50,6 @@ El bloque de regresión fue cerrado y el ranking final está disponible en `outp
 ## Paso 13
 
 Se inició el bloque de clasificación: se crearon los grupos de precio y se definió el split estratificado. Todavía no se ha entrenado ningún clasificador.
+## Paso 14
+
+Se evaluó el árbol de clasificación y se generó la matriz de confusión. El siguiente modelo será Random Forest.

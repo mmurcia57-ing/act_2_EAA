@@ -1,0 +1,4 @@
+grupo,soporte_test,aciertos_dataset,recall_dataset,aciertos_profesor,recall_profesor,diferencia_pp,comentario
+grupo1,25,15,0.6,11,0.44,15.999999999999998,diferencia documentada frente a la matriz de referencia
+grupo2,265,252,0.9509433962264151,255,0.9622641509433962,-1.132075471698113,diferencia documentada frente a la matriz de referencia
+grupo3,2,0,0.0,0,0.0,0.0,grupo3 tiene solo 2 casos; no sobreinterpretar diferencias

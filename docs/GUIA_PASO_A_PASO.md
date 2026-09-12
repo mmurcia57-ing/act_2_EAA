@@ -280,3 +280,34 @@ Este desbalance implica que una accuracy global elevada puede ocultar un mal des
 Se definió `X` excluyendo `SalePrice`, `PriceGroup` e `Id`; `SalePrice` no puede ser predictor porque define directamente la clase y produciría target leakage. Se utilizó `train_test_split` con `test_size=0.20`, `random_state=42` y `stratify=y`. El resultado fue train 1168 y test 292: train tiene grupo1=98 (8.39%), grupo2=1063 (91.01%) y grupo3=7 (0.60%); test tiene grupo1=25 (8.56%), grupo2=265 (90.75%) y grupo3=2 (0.68%).
 
 La estratificación preserva aproximadamente la distribución original y el mismo split debe reutilizarse en los clasificadores posteriores para que sus comparaciones sean justas y reproducibles. La distribución confirma conceptualmente la referencia del profesor: la mayoría pertenece a grupo2, grupo3 es extremadamente pequeño y el problema está fuertemente desbalanceado.
+## Paso 14 - Árbol de decisión para clasificación
+
+### Objetivo y metodología
+
+Se entrenó un árbol de decisión multiclase para predecir `PriceGroup`, reutilizando exactamente los índices del split estratificado del Paso 13: 1168 registros de train y 292 de test, con test grupo1=25, grupo2=265 y grupo3=2. `SalePrice`, `PriceGroup` e `Id` se excluyeron de `X`; de esta forma se evita target leakage, porque `SalePrice` es precisamente la variable que define la clase.
+
+El árbol baseline usa `DecisionTreeClassifier(random_state=42)` sin `class_weight`, profundidad máxima, poda ni tuning. El preprocesamiento se ajustó únicamente sobre train: mediana para numéricas y `None` más `OneHotEncoder(handle_unknown="ignore")` para categóricas. La matriz de confusión se interpreta con filas reales y columnas predichas.
+
+### Resultados
+
+La matriz de confusión fue:
+
+| Real / predicho | grupo1 | grupo2 | grupo3 |
+|---|---:|---:|---:|
+| grupo1 | 15 | 10 | 0 |
+| grupo2 | 13 | 252 | 0 |
+| grupo3 | 0 | 2 | 0 |
+
+La accuracy global fue 0.9144 y la balanced accuracy 0.5170. El macro F1 fue 0.5063. Por grupo, grupo1 tuvo soporte 25, 15 aciertos y recall 0.6000; grupo2 tuvo soporte 265, 252 aciertos y recall 0.9509; grupo3 tuvo soporte 2, 0 aciertos y recall 0.0000. La “exactitud por grupo” solicitada equivale aquí al recall por clase: aciertos de esa fila divididos entre el total real de esa fila.
+
+El árbol obtuvo accuracy train 1.0 frente a 0.9144 en test, con 131 nodos, profundidad 16 y 66 hojas. Esta diferencia sugiere posible sobreajuste, pero debe analizarse junto con las métricas por clase y el fuerte desbalance. Las principales importancias fueron `OverallQual`, `TotalBsmtSF`, `1stFlrSF`, `GarageArea`, `GrLivArea`, `LotFrontage`, `YearBuilt`, `2ndFlrSF`, `KitchenQual_Gd` y `BsmtFinType1_LwQ`.
+
+### Comparación y respuestas académicas
+
+Frente a la referencia del profesor, el soporte coincide en los tres grupos. Para grupo1 obtuvimos recall 60.00% frente a 44.00%; para grupo2, 95.09% frente a 96.23%; y para grupo3, 0% frente a 0%. La matriz no es idéntica, pero el comportamiento de grupo3 coincide: no se acertó ningún caso.
+
+La exactitud por grupo se calcula como aciertos de la fila entre el total real de la fila. Por tanto, fue 60.00% para grupo1, 95.09% para grupo2 y 0% para grupo3.
+
+La conclusión principal es que la accuracy global de 91.44% está dominada por grupo2, que representa 90.75% del test, y oculta el mal desempeño de grupo3. Por eso se deben revisar matriz de confusión, precision, recall, F1 y balanced accuracy, no solo accuracy.
+
+Grupo3 tiene únicamente 2 casos en test y 7 en train, por lo que no es posible aprender un patrón robusto con suficiente confianza. Para pasos posteriores podrían considerarse aumentar ejemplos, `class_weight`, sobremuestreo solo en train, SMOTE con cuidado, revisar los límites si el contexto de negocio lo permite y evaluar siempre métricas por clase. Estas técnicas no se aplicaron en este paso.
