@@ -68,3 +68,7 @@ Se evaluaron SVM lineal y RBF con C=0.1, 1 y 10. El siguiente paso será el cier
 ## Paso 18
 
 Se completó el cierre comparativo de clasificación. XGBoost obtuvo la mejor accuracy; SVM lineal con C=1 obtuvo la mejor balanced accuracy y macro F1. El siguiente bloque será clustering.
+
+## Paso 19
+
+Se ejecutó la selección de K mediante codo y silhouette usando variables numéricas escaladas. El clustering definitivo aún no se ha ejecutado; el siguiente paso será K-Means.

@@ -431,4 +431,20 @@ Grupo3 tiene solo 9 observaciones en el dataset completo, 7 en train y 2 en test
 
 XGBoost obtuvo la mayor exactitud global (96.23%), mientras que SVM lineal con C=1 obtuvo la mayor balanced accuracy (79.16%) y macro F1 (80.15%). Dado el fuerte desbalance, balanced accuracy y macro F1 son métricas más informativas que accuracy global. SVM también fue el único modelo evaluado que identificó uno de los dos inmuebles del grupo3 en test, aunque este resultado no es estadísticamente estable por el reducido soporte de la clase. Por ello, XGBoost es el mejor por accuracy, pero SVM lineal con C=1 es el modelo recomendado cuando se prioriza equilibrio entre clases.
 
+## Paso 19 - Selección del número óptimo de clusters
+
+Clustering es aprendizaje no supervisado: busca grupos de observaciones similares sin una variable objetivo. A diferencia del aprendizaje supervisado, no se entrena contra etiquetas conocidas. En este análisis se excluyeron `SalePrice`, para evitar una segmentación circular que reproduzca los grupos de precio, e `Id`, porque es solo un identificador.
+
+Se utilizaron 36 variables numéricas de características. Los valores faltantes se imputaron con la mediana y después se aplicó `StandardScaler` sobre las 1460 filas completas del análisis no supervisado. El escalado es necesario porque K-Means depende de distancias y variables como `LotArea` podrían dominar a variables como `OverallQual` si permanecieran en sus unidades originales.
+
+Se evaluó K-Means con K=2, 3, 4, 5, 6, 7, 8, 9 y 10, `random_state=42` y `n_init=20`. La inertia mide la variabilidad interna respecto a los centroides; el método del codo busca el punto donde agregar clusters deja de producir reducciones sustanciales. El silhouette score, aproximadamente entre -1 y 1, combina cohesión y separación: valores mayores indican clusters más compactos y separados, valores cercanos a 0 sugieren solapamiento y valores negativos pueden indicar asignaciones inadecuadas. No se establecieron umbrales absolutos rígidos.
+
+La silhouette máxima fue para K=2, con 0.1424. La inertia descendió de 45572.57 en K=2 a 33676.81 en K=10; el codo visual se aproxima a K=3–4, con ganancias marginales decrecientes después de los primeros valores. Como codo y silhouette no coinciden exactamente, se recomienda K=2: maximiza silhouette y mantiene una segmentación interpretable, sin forzar K=3 por la existencia de tres grupos de precio. El resultado no usa `SalePrice` ni `PriceGroup` para seleccionar K.
+
+Para K=2, los tamaños fueron: cluster 0 = 769 viviendas (52.67%) y cluster 1 = 691 viviendas (47.33%). No hay un cluster degenerado en esta configuración. La recomendación es exploratoria; el K-Means definitivo, la interpretación económica de los clusters y su comparación posterior con precios quedan para la siguiente etapa.
+
+### Respuesta académica
+
+Se evaluaron valores de K entre 2 y 10 utilizando tanto la inercia como el índice de silueta. El método del codo permitió observar que la reducción de la variabilidad interna se vuelve progresivamente menor después de los primeros valores, con un codo visual aproximado en K=3–4, mientras que el índice de silueta alcanzó su máximo en K=2 con 0.1424. Por ello, el K seleccionado fue 2: combina el mejor valor de silhouette con una segmentación interpretable y no impone K=3 por los grupos de precio.
+
 El mejor balanced accuracy fue el SVM lineal con C=1 (0.7916). En el kernel lineal, aumentar C de 0.1 a 1 redujo accuracy pero elevó claramente balanced accuracy y macro F1; al pasar a C=10, ambas métricas de equidad descendieron. En RBF, C=0.1 produjo bajo desempeño, mientras C=1 y C=10 lo mejoraron, aunque sin alcanzar al lineal con C=1. Así, en este split el kernel lineal rindió mejor según la métrica prioritaria. El SVM superó al árbol, Random Forest y XGBoost en balanced accuracy y macro F1, pero no en accuracy global frente a XGBoost.

@@ -1,0 +1,2 @@
+n_rows,n_numeric_features,k_min,k_max,best_k_silhouette,best_silhouette,recommended_k,random_state,n_init
+1460,36,2,10,2,0.14237657103136558,2,42,20

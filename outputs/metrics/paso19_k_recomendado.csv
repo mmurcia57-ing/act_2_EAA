@@ -1,0 +1,2 @@
+recommended_k,best_k_silhouette,best_silhouette,elbow_interpretation,selection_reason
+2,2,0.14237657103136558,La curva muestra una disminución fuerte de inertia en los primeros K y ganancias marginales decrecientes después; el codo visual se aproxima a K=3-4.,"Se recomienda K=2 porque maximiza silhouette (0.1424); además mantiene una segmentación interpretable y es compatible con la zona de codo aproximada, sin imponer K=3 por los grupos de precio."

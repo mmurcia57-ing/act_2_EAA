@@ -1,0 +1,10 @@
+k,min_cluster_size,max_cluster_size,size_ratio,silhouette_score,comentario
+2,691,769,1.1128798842257597,0.14237657103136558,sin cluster extremadamente pequeño
+3,354,706,1.9943502824858756,0.1350045927381684,sin cluster extremadamente pequeño
+4,219,560,2.557077625570776,0.11988057076236919,sin cluster extremadamente pequeño
+5,7,389,55.57142857142857,0.09538448146460528,revisar tamaño relativo; no se descarta automáticamente
+6,7,483,69.0,0.10712192284769788,revisar tamaño relativo; no se descarta automáticamente
+7,7,423,60.42857142857143,0.10706802141774449,revisar tamaño relativo; no se descarta automáticamente
+8,7,440,62.857142857142854,0.11004439528652846,revisar tamaño relativo; no se descarta automáticamente
+9,2,330,165.0,0.09869535206496267,revisar tamaño relativo; no se descarta automáticamente
+10,7,311,44.42857142857143,0.09621976881724187,revisar tamaño relativo; no se descarta automáticamente
