@@ -1,0 +1,2 @@
+metrica,valor_dataset,valor_profesor,diferencia_absoluta,diferencia_pct,comentario
+RMSE,42453.07396545554,41002.2,1450.8739654555393,3.538527116729198,"diferencia documentada; no se modificaron semilla, split, preprocesamiento ni hiperparámetros"

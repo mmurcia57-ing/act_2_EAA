@@ -129,3 +129,22 @@ Las reglas estructurales no detectaron inconsistencias: `GarageType == None` fue
 La mejor manera de llenar los valores faltantes depende de su significado. Para missing reales, los numéricos pueden imputarse con la mediana cuando sea adecuada y los categóricos con la moda si son pocos y no representan ausencia estructural. Para missing estructurales conviene crear la categoría explícita `None`; en variables numéricas asociadas a ausencia, usar 0 cuando tenga sentido semántico.
 
 Imputar la moda indiscriminadamente sería incorrecto: asignar a una vivienda sin garaje el tipo de garaje más frecuente inventaría una característica inexistente. Por eso se conservaron las variables y se distinguió la ausencia de un dato no registrado. Todavía no se realiza encoding ni modelado.
+## Paso 07 - Árbol de decisión para regresión
+
+### Metodología
+
+Se construyó un problema de regresión para predecir `SalePrice`, el precio de venta de cada vivienda. Se excluyeron `SalePrice` de los predictores e `Id` por ser un identificador, quedando 79 predictores originales. Se dividieron los datos antes de ajustar cualquier transformación: 1168 observaciones para train y 292 para test, con `random_state=42` y sin estratificación.
+
+Esto evita data leakage: el modelo no usa `outputs/tables/housing_train_imputado.csv`, cuyos valores fueron calculados sobre todo el dataset. En su lugar, el pipeline lee `data/housing_train.csv`, ajusta la imputación únicamente sobre `X_train` y luego transforma test. Las variables numéricas usan mediana y las categóricas usan `None` seguido de `OneHotEncoder(handle_unknown="ignore")`; los árboles no manejan strings categóricos directamente en scikit-learn.
+
+### Resultado del baseline
+
+El `DecisionTreeRegressor(random_state=42)` sin `max_depth`, `min_samples_leaf` ni `ccp_alpha` obtuvo en test MAE 27494.58, RMSE 42453.07 y R² 0.7650. La referencia del profesor es RMSE 41002.2; la diferencia absoluta es 1450.87 (3.54%). Se documenta la diferencia sin alterar split, semilla, preprocesamiento ni hiperparámetros. Puede deberse a diferencias de implementación, tratamiento de categóricas, missing o versiones.
+
+El árbol produjo 2245 nodos, profundidad máxima 24 y 1123 hojas. En train el RMSE fue 0.00, frente a 42453.07 en test; esta brecha constituye un indicio claro de posible sobreajuste en este baseline sin restricciones. Las importancias principales fueron `OverallQual`, `GrLivArea`, `TotalBsmtSF`, `2ndFlrSF` y `BsmtFinSF1`. Las categóricas aparecen descompuestas en features por categoría tras el OneHotEncoder, por lo que sus importancias deben interpretarse con esa limitación.
+
+### Respuesta académica
+
+El árbol de decisión sin podar obtuvo un RMSE de 42453.07. La referencia proporcionada por el profesor es 41002.2; el valor del dataset es 1450.87 mayor, una diferencia de 3.54%, y no se forzó coincidencia.
+
+Un árbol sin restricciones puede ajustarse fuertemente al conjunto de entrenamiento, por lo que la diferencia entre el error de entrenamiento y de prueba permite evaluar indicios de sobreajuste. En el siguiente paso se evaluará la poda y se comprobará empíricamente si simplificar el árbol mejora o empeora su capacidad de generalización.

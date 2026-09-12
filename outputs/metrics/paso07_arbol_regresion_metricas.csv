@@ -1,0 +1,2 @@
+modelo,n_train,n_test,mae,rmse,r2,train_seconds,random_state
+DecisionTreeRegressor_sin_poda,1168,292,27494.575342465752,42453.07396545554,0.7650343100887013,0.6996426000259817,42

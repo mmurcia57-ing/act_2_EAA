@@ -29,3 +29,6 @@ Se calcularon las correlaciones numéricas y se documentó la redundancia prelim
 ## Paso 06
 
 Se trataron los missing y está disponible el dataset derivado imputado en `outputs/tables/housing_train_imputado.csv`. El dataset original fue preservado; todavía no se ha realizado encoding ni modelado.
+## Paso 07
+
+Se entrenó el primer modelo supervisado: un árbol de regresión baseline con preprocesamiento dentro de un pipeline sin leakage. La poda aún no se ha realizado.
