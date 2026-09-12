@@ -1,0 +1,2 @@
+total_registros,n_train,n_test,grupo1_total,grupo2_total,grupo3_total,grupo1_test,grupo2_test,grupo3_test,ratio_mayoritaria_minoritaria,stratified_split,random_state
+1460,1168,292,123,1328,9,25,265,2,147.55555555555554,True,42

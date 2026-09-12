@@ -1,0 +1,4 @@
+hallazgo,resultado_dataset,referencia_profesor,coincide_conceptualmente,comentario
+grupo2 es mayoritario,1328 (90.96%),la mayoría de viviendas caerá en grupo2,True,coincide
+grupo3 es muy minoritario,9 (0.62%),grupo3 será extremadamente pequeño,True,coincide conceptualmente
+clasificación fuertemente desbalanceada,ratio 147.56:1,se espera desbalance,True,la clase mayoritaria domina ampliamente

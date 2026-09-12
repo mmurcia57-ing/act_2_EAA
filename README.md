@@ -47,3 +47,6 @@ Se evaluó una MLP de regresión y se completó la comparación de los cinco mod
 ## Paso 12
 
 El bloque de regresión fue cerrado y el ranking final está disponible en `outputs/tables/`. El mejor modelo fue XGBoost. El siguiente bloque será clasificación.
+## Paso 13
+
+Se inició el bloque de clasificación: se crearon los grupos de precio y se definió el split estratificado. Todavía no se ha entrenado ningún clasificador.

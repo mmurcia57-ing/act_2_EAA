@@ -261,3 +261,22 @@ En nuestro experimento, la poda mejora: el RMSE pasa de 42453.07 a 40386.27. En 
 El árbol es sencillo e interpretable, pero tiene alta varianza. El árbol podado es más interpretable, aunque una poda excesiva puede producir underfitting. Random Forest es robusto y reduce varianza, con mayor costo e interpretabilidad menor. XGBoost ofrece alto desempeño y modela relaciones complejas, pero requiere más control de hiperparámetros y puede sobreajustar. La MLP es flexible y no lineal, pero es sensible al escalado, más compleja de entrenar y no necesariamente supera a los modelos de árboles en datasets tabulares pequeños.
 
 Los modelos son realmente útiles para este conjunto de datos: especialmente Random Forest, XGBoost y MLP muestran capacidad predictiva relevante. XGBoost alcanza R²=0.9148, lo que significa que explica aproximadamente el 91.5% de la variabilidad observada en `SalePrice` en test bajo este split; no significa que prediga correctamente el 91.5% de los casos. Su RMSE de aproximadamente 25.6 mil dólares representa un error típico penalizado por cuadrados, no un error promedio exacto. Estas conclusiones se limitan a este dataset, split, configuración y laboratorio; no prueban causalidad, desempeño productivo ni superioridad universal.
+## Paso 13 - Creación de grupos para clasificación
+
+### Creación de la variable objetivo
+
+Se creó `PriceGroup` a partir de `SalePrice` para convertir el problema de regresión en uno de clasificación. Regresión predice un valor numérico continuo; clasificación predice una clase discreta. `SalePrice` original se conservó sin modificar.
+
+Las reglas exactas fueron: `grupo1` si `SalePrice <= 100000`; `grupo2` si `100001 <= SalePrice <= 500000`; y `grupo3` si `SalePrice >= 500001`. La implementación con condiciones consecutivas no deja huecos ni solapamientos.
+
+### Distribución y desbalance
+
+El dataset contiene 123 viviendas en grupo1 (8.42%), 1328 en grupo2 (90.96%) y 9 en grupo3 (0.62%). La clase mayoritaria es grupo2 y la minoritaria grupo3, con una razón de 147.56 a 1. El problema está fuertemente desbalanceado.
+
+Este desbalance implica que una accuracy global elevada puede ocultar un mal desempeño en la clase minoritaria. Por esta razón, además de la accuracy global, será necesario analizar la matriz de confusión y la exactitud/recall por grupo.
+
+### Split estratificado
+
+Se definió `X` excluyendo `SalePrice`, `PriceGroup` e `Id`; `SalePrice` no puede ser predictor porque define directamente la clase y produciría target leakage. Se utilizó `train_test_split` con `test_size=0.20`, `random_state=42` y `stratify=y`. El resultado fue train 1168 y test 292: train tiene grupo1=98 (8.39%), grupo2=1063 (91.01%) y grupo3=7 (0.60%); test tiene grupo1=25 (8.56%), grupo2=265 (90.75%) y grupo3=2 (0.68%).
+
+La estratificación preserva aproximadamente la distribución original y el mismo split debe reutilizarse en los clasificadores posteriores para que sus comparaciones sean justas y reproducibles. La distribución confirma conceptualmente la referencia del profesor: la mayoría pertenece a grupo2, grupo3 es extremadamente pequeño y el problema está fuertemente desbalanceado.
