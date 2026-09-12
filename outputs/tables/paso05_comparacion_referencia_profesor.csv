@@ -1,0 +1,7 @@
+hallazgo,valor_dataset,referencia_profesor,coincide,comentario
+OverallQual entre las más correlacionadas con SalePrice,0.7909816005838053,debe aparecer entre las variables más relacionadas,True,comparación conceptual; no se inventaron valores de referencia
+GrLivArea entre las más correlacionadas con SalePrice,0.7086244776126515,debe aparecer entre las variables más relacionadas,True,comparación conceptual; no se inventaron valores de referencia
+GarageCars-GarageArea como par relevante,0.882475414281462,par con correlación alta o relevante,True,comparación conceptual; no se inventaron valores de referencia
+TotalBsmtSF-1stFlrSF como par relevante,0.8195299750050339,par con correlación alta o relevante,True,comparación conceptual; no se inventaron valores de referencia
+YearBuilt-GarageYrBlt como par relevante,0.8256674841743408,par con correlación alta o relevante,True,comparación conceptual; no se inventaron valores de referencia
+GrLivArea-TotRmsAbvGrd como par relevante,0.8254893743088425,par con correlación alta o relevante,True,comparación conceptual; no se inventaron valores de referencia

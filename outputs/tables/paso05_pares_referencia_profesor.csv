@@ -1,0 +1,5 @@
+variable_1,variable_2,correlacion_dataset,observacion,coincide_con_referencia_conceptual
+GarageCars,GarageArea,0.882475414281462,par con relación alta o relevante para revisar,True
+TotalBsmtSF,1stFlrSF,0.8195299750050339,par con relación alta o relevante para revisar,True
+YearBuilt,GarageYrBlt,0.8256674841743408,par con relación alta o relevante para revisar,True
+GrLivArea,TotRmsAbvGrd,0.8254893743088425,par con relación alta o relevante para revisar,True

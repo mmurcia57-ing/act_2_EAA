@@ -23,3 +23,6 @@ Se completó la estadística descriptiva de variables numéricas. Aún no se han
 ## Paso 04
 
 Se completó el análisis categórico y de frecuencias. Aún no se realiza encoding ni imputación de missing.
+## Paso 05
+
+Se calcularon las correlaciones numéricas y se documentó la redundancia preliminar. Todavía no se eliminan variables; el siguiente paso será el tratamiento de missing.

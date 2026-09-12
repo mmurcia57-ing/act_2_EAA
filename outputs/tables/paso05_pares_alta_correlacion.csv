@@ -1,0 +1,5 @@
+variable_1,variable_2,correlacion,abs_correlacion,interpretacion,decision_preliminar
+GarageCars,GarageArea,0.882475414281462,0.882475414281462,fuerte,revisar_redundancia
+YearBuilt,GarageYrBlt,0.8256674841743408,0.8256674841743408,fuerte,revisar_redundancia
+GrLivArea,TotRmsAbvGrd,0.8254893743088425,0.8254893743088425,fuerte,revisar_redundancia
+TotalBsmtSF,1stFlrSF,0.8195299750050339,0.8195299750050339,fuerte,revisar_redundancia

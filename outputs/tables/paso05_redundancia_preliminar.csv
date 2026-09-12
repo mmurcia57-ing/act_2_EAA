@@ -1,0 +1,5 @@
+variable_1,variable_2,correlacion,candidata_a_revisar,justificacion
+GarageCars,GarageArea,0.882475414281462,sí,posible información redundante; revisar según modelo y contexto
+YearBuilt,GarageYrBlt,0.8256674841743408,sí,posible información redundante; revisar según modelo y contexto
+GrLivArea,TotRmsAbvGrd,0.8254893743088425,sí,posible información redundante; revisar según modelo y contexto
+TotalBsmtSF,1stFlrSF,0.8195299750050339,sí,posible información redundante; revisar según modelo y contexto

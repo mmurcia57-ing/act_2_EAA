@@ -83,3 +83,26 @@ Hay 16 variables categóricas con missing. Los porcentajes más altos están en 
 Las variables categóricas muestran que algunas tienen pocas categorías, mientras otras, como `Neighborhood`, tienen muchas. Algunas están fuertemente dominadas por una sola categoría y otras presentan niveles muy poco frecuentes. Varias tienen missing que puede ser estructural. Estas características condicionarán el preprocesamiento: las categóricas deberán codificarse antes de entrenar modelos en Python/scikit-learn y OneHotEncoder puede aumentar considerablemente la dimensionalidad cuando hay alta cardinalidad.
 
 No se agrupan categorías raras ni se eliminan variables todavía: primero debe revisarse su significado y su aporte junto con missing, correlaciones y desempeño predictivo. La comparación con la referencia del profesor coincide: `Neighborhood` tiene 25 categorías y `Street` tiene 2.
+## Paso 05 - Matriz de correlaciones y redundancia numérica
+
+### Objetivo y metodología
+
+Se calculó la matriz de correlaciones de Pearson con las 37 variables numéricas interpretadas como predictoras, excluyendo `Id` y manteniendo `SalePrice` como objetivo. No se imputaron valores: pandas calculó cada correlación con los datos disponibles por pares.
+
+### Variables más correlacionadas con SalePrice
+
+Las diez variables con mayor correlación absoluta con `SalePrice` fueron `OverallQual` (0.791), `GrLivArea` (0.709), `GarageCars` (0.640), `GarageArea` (0.623), `TotalBsmtSF` (0.614), `1stFlrSF` (0.606), `FullBath` (0.561), `TotRmsAbvGrd` (0.534), `YearBuilt` (0.523) y `YearRemodAdd` (0.507). En particular, `OverallQual` y `GrLivArea` presentan relaciones positivas fuertes con el precio.
+
+### Pares de predictores fuertemente correlacionados
+
+Se encontraron cuatro pares con `|r| >= 0.70`: `GarageCars`-`GarageArea` (0.882), `YearBuilt`-`GarageYrBlt` (0.826), `GrLivArea`-`TotRmsAbvGrd` (0.825) y `TotalBsmtSF`-`1stFlrSF` (0.820). Estos pares sugieren redundancia potencial y fueron marcados para revisión preliminar.
+
+### Respuesta académica a la Figura 3
+
+Las variables más correlacionadas con `SalePrice` son principalmente indicadores de calidad, superficie, garaje, sótano, baños y antigüedad. Separadamente, los pares de predictores con mayor correlación entre sí describen aspectos relacionados del mismo inmueble y pueden introducir multicolinealidad o información redundante.
+
+Sí, se puede considerar eliminar alguna columna o simplificar grupos de variables, pero todavía no se elimina ninguna solo por correlación. Los árboles y random forest suelen tolerar mejor predictores correlacionados, mientras que los modelos lineales y otros sensibles a redundancia pueden beneficiarse de simplificación. La decisión definitiva requiere completar el tratamiento de missing, preparar el pipeline y comparar modelos.
+
+La correlación no implica causalidad y puede estar afectada por relaciones no lineales, valores atípicos y datos faltantes. Por ello, estos resultados son una guía exploratoria: `GarageCars`/`GarageArea`, `TotalBsmtSF`/`1stFlrSF`, `YearBuilt`/`GarageYrBlt` y `GrLivArea`/`TotRmsAbvGrd` son candidatos preliminares a revisar, no variables eliminadas.
+
+La comparación conceptual coincide con la referencia del profesor: `OverallQual` y `GrLivArea` aparecen entre las variables más relacionadas con `SalePrice`, y los cuatro pares de referencia muestran correlaciones altas o relevantes.
