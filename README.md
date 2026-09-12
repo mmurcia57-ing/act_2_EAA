@@ -84,3 +84,7 @@ Se evaluó clustering jerárquico aglomerativo con Ward y K=2, usando las mismas
 ## Paso 22
 
 Se completó el cierre comparativo de clustering y su relación descriptiva con los grupos de precio. K-Means y clustering jerárquico fueron comparados mediante silhouette, ARI, perfiles y tamaños. El siguiente paso será Isolation Forest.
+
+## Paso 23
+
+Se evaluó Isolation Forest para detectar anomalías estructurales y se caracterizaron sus diferencias, relación descriptiva con `SalePrice` y distribución por `PriceGroup`. El siguiente paso será Q-learning.

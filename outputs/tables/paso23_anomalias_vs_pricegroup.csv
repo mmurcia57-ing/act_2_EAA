@@ -1,0 +1,7 @@
+status,price_group,n,pct_dentro_status
+normal,grupo1,117,8.417266187050359
+anomalo,grupo1,6,8.571428571428571
+normal,grupo2,1271,91.43884892086331
+anomalo,grupo2,57,81.42857142857143
+normal,grupo3,2,0.14388489208633093
+anomalo,grupo3,7,10.0
