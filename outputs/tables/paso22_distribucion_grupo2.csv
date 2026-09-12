@@ -1,0 +1,5 @@
+metodo,perfil_semantico,n,pct_grupo2
+KMeans,perfil_bajo,647,48.71987951807229
+KMeans,perfil_alto,681,51.28012048192772
+Hierarchical_Ward,perfil_bajo,782,58.8855421686747
+Hierarchical_Ward,perfil_alto,546,41.1144578313253

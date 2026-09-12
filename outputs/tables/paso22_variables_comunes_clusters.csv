@@ -1,0 +1,11 @@
+variable,ranking_kmeans,ranking_jerarquico
+FullBath,1,2
+YearBuilt,3,1
+OverallQual,2,3
+GarageYrBlt,4,4
+GarageCars,5,5
+YearRemodAdd,7,6
+GrLivArea,6,8
+GarageArea,8,7
+TotalBsmtSF,9,9
+TotRmsAbvGrd,10,10

@@ -1,0 +1,5 @@
+metodo,price_group,total_group,n_en_perfil_esperado,pct_en_perfil_esperado
+KMeans,grupo1,123,122,99.1869918699187
+KMeans,grupo3,9,9,100.0
+Hierarchical_Ward,grupo1,123,122,99.1869918699187
+Hierarchical_Ward,grupo3,9,9,100.0

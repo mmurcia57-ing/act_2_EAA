@@ -1,0 +1,5 @@
+metodo,perfil_semantico,n,saleprice_mean,saleprice_median,saleprice_q1,saleprice_q3
+KMeans,perfil_bajo,769,131767.01170351106,132500.0,112000.0,149000.0
+KMeans,perfil_alto,691,235623.8986975398,214000.0,181067.0,267500.0
+Hierarchical_Ward,perfil_bajo,904,143404.39380530972,137000.0,116800.0,160000.0
+Hierarchical_Ward,perfil_alto,556,241919.73741007195,220000.0,186500.0,272500.0

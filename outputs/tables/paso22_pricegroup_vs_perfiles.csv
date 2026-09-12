@@ -1,0 +1,13 @@
+metodo,perfil_semantico,price_group,n,pct_dentro_perfil
+KMeans,perfil_bajo,grupo1,122,15.864759427828348
+KMeans,perfil_bajo,grupo2,647,84.13524057217165
+KMeans,perfil_bajo,grupo3,0,0.0
+KMeans,perfil_alto,grupo1,1,0.1447178002894356
+KMeans,perfil_alto,grupo2,681,98.55282199710564
+KMeans,perfil_alto,grupo3,9,1.3024602026049203
+Hierarchical_Ward,perfil_bajo,grupo1,122,13.495575221238937
+Hierarchical_Ward,perfil_bajo,grupo2,782,86.50442477876106
+Hierarchical_Ward,perfil_bajo,grupo3,0,0.0
+Hierarchical_Ward,perfil_alto,grupo1,1,0.1798561151079137
+Hierarchical_Ward,perfil_alto,grupo2,546,98.20143884892086
+Hierarchical_Ward,perfil_alto,grupo3,9,1.618705035971223

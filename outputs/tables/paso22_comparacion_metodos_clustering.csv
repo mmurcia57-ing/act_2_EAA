@@ -1,0 +1,3 @@
+metodo,n_clusters,silhouette,cluster_small_size,cluster_large_size,saleprice_low_profile_mean,saleprice_high_profile_mean,observacion
+KMeans,2,0.1423765710313655,691,769,131767.01170351106,235623.8986975398,perfiles semánticos alineados; labels originales arbitrarios
+Hierarchical_Ward,2,0.1150338267045204,556,904,143404.39380530972,241919.73741007195,perfiles semánticos alineados; labels originales arbitrarios

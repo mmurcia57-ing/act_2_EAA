@@ -477,6 +477,24 @@ Después del clustering, `SalePrice` tuvo media 241919.74 y mediana 220000 en el
 
 El clustering jerárquico produjo dos grupos usando Ward sobre variables numéricas estandarizadas. Sus resultados se compararon con K-Means mediante tamaños, perfiles, silhouette y Adjusted Rand Index. K-Means obtuvo mayor silhouette (0.1424 frente a 0.1150), mientras que el ARI de 0.5735 indica coincidencia parcial. La diferencia de tamaños y perfiles confirma que ambos métodos capturan una estructura relacionada, pero no idéntica.
 
+## Paso 22 - Comparación final de clustering y grupos de precio
+
+Se cerró el bloque de clustering comparando K-Means y clustering jerárquico Ward, ambos con K=2 y las mismas 36 variables numéricas. Los labels originales se alinearon semánticamente: `perfil_bajo` corresponde a viviendas más antiguas, pequeñas y de menor calidad, y `perfil_alto` a viviendas más nuevas, grandes y de mayor calidad.
+
+K-Means obtuvo silhouette 0.1424 y produjo perfiles bajo/alto de 769/691 viviendas. El jerárquico obtuvo silhouette 0.1150 y produjo perfiles bajo/alto de 904/556 viviendas. El Adjusted Rand Index fue 0.5735, lo que indica coincidencia parcial, no equivalencia. K-Means presenta clusters más equilibrados, mientras Ward aporta la estructura visual del dendrograma.
+
+El grupo1 se concentró en el perfil bajo en 99.19% con ambos métodos: 122 de 123 viviendas. El grupo3 se concentró en el perfil alto en 100%: 9 de 9 viviendas. El grupo2, que contiene 1328 de 1460 viviendas, fue heterogéneo: K-Means asignó 647 (48.72%) al perfil bajo y 681 (51.28%) al alto; el jerárquico asignó 782 (58.89%) al bajo y 546 (41.11%) al alto.
+
+Descriptivamente, el perfil alto tuvo precios superiores al perfil bajo. En K-Means, la diferencia fue de 103856.89 en media y 81500 en mediana. En el jerárquico, la diferencia fue de 98515.34 en media y 83000 en mediana. `SalePrice` se utilizó solo después del clustering; estas asociaciones no implican causalidad.
+
+Las variables estructurales comunes en el top 10 de ambos métodos fueron `FullBath`, `YearBuilt`, `OverallQual`, `GarageYrBlt`, `GarageCars`, `YearRemodAdd`, `GrLivArea`, `GarageArea`, `TotalBsmtSF` y `TotRmsAbvGrd`. Esto muestra un eje estructural semejante basado en antigüedad, calidad, tamaño y capacidad de garaje.
+
+No se calculó accuracy contra `PriceGroup`, porque los clusters no son clases supervisadas. K=2 no tiene que coincidir con los tres grupos de precio: esos grupos fueron definidos artificialmente mediante umbrales de `SalePrice`, mientras los clusters fueron descubiertos sin usar `SalePrice`. K-Means puede considerarse ligeramente preferido para esta segmentación por su mayor silhouette y tamaños más equilibrados; no existe un ganador absoluto para todos los objetivos.
+
+### Respuesta académica final
+
+Ambos métodos identificaron una estructura semejante basada principalmente en antigüedad, calidad, tamaño y capacidad de garaje. Los clusters no reprodujeron los tres grupos de precio, lo cual es esperable al tratarse de aprendizaje no supervisado. Prácticamente todas las viviendas del grupo1 quedaron en el perfil bajo, mientras las del grupo3 quedaron en el perfil alto. El grupo2 se distribuyó entre ambos perfiles porque contiene viviendas estructuralmente heterogéneas. La interpretación es exploratoria y está limitada por el silhouette bajo, el reducido grupo3, los umbrales de precio y la selección exclusiva de variables numéricas.
+
 Las limitaciones son la sensibilidad del método a la distancia y al `linkage`, la importancia crítica del escalado, la dificultad de interpretar un dendrograma grande y el carácter exploratorio de los clusters. Las etiquetas numéricas de los grupos no tienen significado por sí solas.
 
 ### Respuesta académica

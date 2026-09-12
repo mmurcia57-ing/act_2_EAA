@@ -80,3 +80,7 @@ Se completó el K-Means definitivo con K=2 y se caracterizaron los perfiles de v
 ## Paso 21
 
 Se evaluó clustering jerárquico aglomerativo con Ward y K=2, usando las mismas variables y preprocesamiento de K-Means. También se compararon tamaños, perfiles, silhouette y ARI. El siguiente paso será comparar clusters con grupos de precio.
+
+## Paso 22
+
+Se completó el cierre comparativo de clustering y su relación descriptiva con los grupos de precio. K-Means y clustering jerárquico fueron comparados mediante silhouette, ARI, perfiles y tamaños. El siguiente paso será Isolation Forest.

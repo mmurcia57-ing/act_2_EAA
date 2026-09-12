@@ -1,0 +1,3 @@
+metodo,silhouette,ARI,tamano_perfil_bajo,tamano_perfil_alto,saleprice_medio_bajo,saleprice_medio_alto,variables_discriminantes_comunes,interpretacion_general
+KMeans,0.1423765710313655,0.5735140574296844,769,691,131767.01170351106,235623.8986975398,"FullBath, YearBuilt, OverallQual, GarageYrBlt, GarageCars, YearRemodAdd, GrLivArea, GarageArea, TotalBsmtSF, TotRmsAbvGrd",mayor silhouette y perfiles más equilibrados
+Hierarchical_Ward,0.1150338267045204,0.5735140574296844,904,556,143404.39380530972,241919.73741007195,"FullBath, YearBuilt, OverallQual, GarageYrBlt, GarageCars, YearRemodAdd, GrLivArea, GarageArea, TotalBsmtSF, TotRmsAbvGrd",dendrograma aporta estructura jerárquica; perfiles más desiguales

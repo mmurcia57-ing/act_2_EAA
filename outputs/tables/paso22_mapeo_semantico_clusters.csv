@@ -1,0 +1,5 @@
+metodo,cluster_original,perfil_semantico
+KMeans,0,perfil_bajo
+KMeans,1,perfil_alto
+Hierarchical_Ward,0,perfil_alto
+Hierarchical_Ward,1,perfil_bajo
