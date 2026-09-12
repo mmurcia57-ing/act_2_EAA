@@ -1,0 +1,6 @@
+modelo,ventajas,desventajas,cuando_usarlo,resultado_en_este_dataset
+arbol_sin_poda,interpretable; sencillo; poca preparación conceptual,alta varianza; puede sobreajustar,baseline interpretable y rápido,menor desempeño y sobreajuste muy fuerte
+arbol_podado,menor complejidad; mayor interpretabilidad,poda excesiva puede generar underfitting,cuando se prioriza interpretación con complejidad controlada,mejoró frente al árbol sin poda
+random_forest,robusto; reduce varianza; buen desempeño tabular,menor interpretabilidad; más costo que un árbol,baseline robusto para datos tabulares,segundo mejor RMSE
+xgboost,alto desempeño; relaciones complejas; corrige errores secuencialmente,más hiperparámetros; puede sobreajustar; menos interpretable,cuando se busca desempeño y se puede validar cuidadosamente,mejor modelo
+mlp,capacidad no lineal; arquitectura flexible,sensible a escalado; entrenamiento más complejo; menos interpretable; no siempre mejor en tabulares pequeños,cuando hay relaciones no lineales y datos/preprocesamiento adecuados,"tercer lugar, cercano a RF"

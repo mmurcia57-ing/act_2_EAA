@@ -1,0 +1,4 @@
+modelo,rmse_dataset,rmse_profesor,diferencia_absoluta,diferencia_pct,comportamiento_dataset,comportamiento_profesor,comentario
+arbol_sin_poda,42453.07,41002.2,1450.8700000000026,3.538517445405375,resultado observado,resultado de referencia,"diferencia documentada por split, poda, preprocesamiento, implementación, codificación o hiperparámetros"
+arbol_podado,40386.27,42927.25,2540.980000000003,5.9192703935146165,poda mejora,poda empeora,"diferencia documentada por split, poda, preprocesamiento, implementación, codificación o hiperparámetros"
+random_forest,28929.45,27588.9,1340.5499999999993,4.8590193882322215,resultado observado,resultado de referencia,"diferencia documentada por split, poda, preprocesamiento, implementación, codificación o hiperparámetros"

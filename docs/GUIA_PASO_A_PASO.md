@@ -234,3 +234,30 @@ El ranking por RMSE test fue: XGBoost (25564.80), Random Forest (28929.45), MLP 
 La MLP utilizada estuvo formada por `Dense(128)-Dense(64)-Dense(32)-Dense(1)` con activación ReLU en las capas ocultas, salida lineal y optimización mediante Adam. El aprendizaje se realizó mediante backpropagation, proceso por el cual el error calculado en la salida se propaga hacia atrás para actualizar los pesos de la red.
 
 El modelo obtuvo un RMSE de 29390.27 en test. Comparado con Random Forest (28929.45), la MLP empeoró el desempeño en 1.59%; comparada con XGBoost (25564.80), empeoró en 14.96%. Este comportamiento es razonable en un dataset tabular de 1460 observaciones, donde modelos basados en árboles pueden ser muy competitivos frente a redes neuronales. La MLP no debe considerarse inválida: su desempeño depende de arquitectura, escalado, regularización, entrenamiento y características del dataset.
+## Paso 12 - Cierre comparativo del problema de regresión
+
+### Comparación final
+
+Se cerró el bloque de regresión utilizando las métricas ya validadas de los pasos 07 a 11, sin entrenar modelos nuevos ni recalcular predicciones. La métrica principal fue RMSE, complementada con MAE y R². El ranking por RMSE test fue:
+
+| Modelo | RMSE | MAE | R² | Comentario |
+|---|---:|---:|---:|---|
+| XGBoost | 25564.80 | 15852.43 | 0.9148 | Mejor desempeño |
+| Random Forest | 28929.45 | 17410.11 | 0.8909 | Segundo |
+| MLP | 29390.27 | 17913.03 | 0.8874 | Tercero y cercano a RF |
+| Árbol podado | 40386.27 | 25776.51 | 0.7874 | Menor complejidad |
+| Árbol sin poda | 42453.07 | 27494.58 | 0.7650 | Sobreajuste fuerte |
+
+XGBoost fue el mejor modelo. Mejoró frente a Random Forest en 3364.65 de RMSE (11.63%) y frente a MLP en 3825.47 (13.02%). Random Forest mejora al árbol al reducir varianza mediante un ensamble; XGBoost mejora aún más mediante aprendizaje secuencial. La MLP funciona bien, pero no supera a los ensambles de árboles en este dataset tabular.
+
+### Generalización y efecto de la poda
+
+El árbol sin poda presenta el mayor indicio de sobreajuste: RMSE train 0 frente a RMSE test 42453.07. El árbol podado reduce la complejidad y mejora la generalización en nuestro experimento. Random Forest tiene gap train-test existente, pero buen desempeño test; XGBoost logra el menor RMSE test y un gap menor que RF; MLP también tiene buen desempeño, aunque queda por debajo de RF y XGBoost.
+
+En nuestro experimento, la poda mejora: el RMSE pasa de 42453.07 a 40386.27. En la referencia del profesor ocurre lo contrario: pasa de 41002.2 a 42927.25, un empeoramiento de 1925.05. Esto no se presenta como error: las diferencias pueden deberse al split, criterio de poda, preprocesamiento, implementación R/Python, codificación o hiperparámetros.
+
+### Ventajas, desventajas y utilidad
+
+El árbol es sencillo e interpretable, pero tiene alta varianza. El árbol podado es más interpretable, aunque una poda excesiva puede producir underfitting. Random Forest es robusto y reduce varianza, con mayor costo e interpretabilidad menor. XGBoost ofrece alto desempeño y modela relaciones complejas, pero requiere más control de hiperparámetros y puede sobreajustar. La MLP es flexible y no lineal, pero es sensible al escalado, más compleja de entrenar y no necesariamente supera a los modelos de árboles en datasets tabulares pequeños.
+
+Los modelos son realmente útiles para este conjunto de datos: especialmente Random Forest, XGBoost y MLP muestran capacidad predictiva relevante. XGBoost alcanza R²=0.9148, lo que significa que explica aproximadamente el 91.5% de la variabilidad observada en `SalePrice` en test bajo este split; no significa que prediga correctamente el 91.5% de los casos. Su RMSE de aproximadamente 25.6 mil dólares representa un error típico penalizado por cuadrados, no un error promedio exacto. Estas conclusiones se limitan a este dataset, split, configuración y laboratorio; no prueban causalidad, desempeño productivo ni superioridad universal.

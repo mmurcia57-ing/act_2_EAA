@@ -1,0 +1,2 @@
+best_model,best_rmse,best_mae,best_r2,second_best_model,second_best_rmse,xgboost_vs_rf_rmse_abs,xgboost_vs_rf_rmse_pct,xgboost_vs_mlp_rmse_abs,xgboost_vs_mlp_rmse_pct,tree_pruning_effect,professor_pruning_effect
+xgboost,25564.8,15852.43,0.9148,random_forest,28929.45,-3364.6500000000015,-11.630535665213134,-3825.474309710007,-13.016123188908587,mejoró en nuestro experimento,empeoró: 41002.2 a 42927.25 (+1925.05)

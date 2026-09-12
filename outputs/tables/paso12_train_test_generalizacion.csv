@@ -1,0 +1,6 @@
+modelo,rmse_train,rmse_test,gap_abs,ratio_test_train,interpretacion
+xgboost,11960.51,25564.8,13604.289999999999,2.137433938853778,"mejor RMSE test; controlar sobreajuste, pero buena generalización relativa"
+random_forest,11063.98,28929.45,17865.47,2.61474171139138,gap existente pero buen desempeño en test
+mlp,12679.088295299469,29390.274309710006,16711.186014410538,2.3180116444654693,"buen desempeño, aunque inferior a RF/XGB en este dataset"
+arbol_podado,19979.7,40386.27,20406.569999999996,2.021365185663448,menor sobreajuste y mejor generalización que baseline
+arbol_sin_poda,0.0,42453.07,42453.07,,sobreajuste muy fuerte

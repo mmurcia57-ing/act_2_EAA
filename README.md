@@ -44,3 +44,6 @@ Se evaluó XGBoost para regresión y se completó la comparación con árboles y
 ## Paso 11
 
 Se evaluó una MLP de regresión y se completó la comparación de los cinco modelos de regresión. La clasificación aún no se ha iniciado.
+## Paso 12
+
+El bloque de regresión fue cerrado y el ranking final está disponible en `outputs/tables/`. El mejor modelo fue XGBoost. El siguiente bloque será clasificación.
