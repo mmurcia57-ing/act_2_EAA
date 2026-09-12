@@ -213,3 +213,24 @@ Las principales importancias transformadas fueron `OverallQual`, `ExterQual_TA`,
 El modelo de gradient boosting obtuvo un RMSE de 25564.80. Frente al árbol sin poda (42453.07), representa una mejora de 39.78%; frente al árbol podado (40386.27), una mejora de 36.70%; y frente a Random Forest (28929.45), una mejora de 11.63%.
 
 La diferencia conceptual principal es que Random Forest construye múltiples árboles diversificados y promedia sus resultados, mientras que XGBoost construye árboles secuencialmente para corregir los residuos de los modelos anteriores. En este experimento XGBoost obtuvo el menor RMSE, pero no debe afirmarse que siempre sea mejor: su desempeño depende de la configuración, los datos y la validación. El gap train-test de 13604.29 indica una diferencia de generalización que debe vigilarse, aunque es menor que la de Random Forest. MLP queda pendiente para el Paso 11.
+## Paso 11 - Red neuronal MLP para regresión
+
+### Arquitectura y entrenamiento
+
+Una MLP es una red neuronal formada por neuronas conectadas mediante pesos y sesgos. Las capas ocultas transforman las entradas y aprenden relaciones no lineales. La arquitectura utilizada fue `Dense(128)-Dense(64)-Dense(32)-Dense(1)`: tres capas ocultas de 128, 64 y 32 neuronas con activación ReLU y una neurona de salida lineal para regresión.
+
+Se usó TensorFlow/Keras 2.21.0 porque es compatible con Python 3.13.9. El optimizador fue Adam y la función de pérdida MSE. El entrenamiento usó batch size 32, máximo de 500 epochs y early stopping sobre `val_loss` con paciencia 30 y restauración de los mejores pesos; se detuvo después de 55 epochs. Las variables numéricas se imputaron con mediana y escalaron con `StandardScaler`; las categóricas se imputaron con `None` y se codificaron con `OneHotEncoder`. El target `SalePrice` se escaló con un `StandardScaler` ajustado solo sobre `y_train` y las predicciones se regresaron a dólares antes de calcular métricas.
+
+Durante cada epoch, la red realiza un forward pass, calcula el error, y backpropagation obtiene los gradientes del error respecto a pesos y sesgos. Adam usa esos gradientes para actualizar los parámetros. Early stopping ayuda a detener el aprendizaje cuando la pérdida de validación deja de mejorar.
+
+### Resultados
+
+En train la MLP obtuvo MAE 9191.99, RMSE 12679.09 y R² 0.9730. En test obtuvo MAE 17913.03, RMSE 29390.27 y R² 0.8874. El gap RMSE train-test fue 16711.19. Las métricas están expresadas en dólares reales después de invertir el escalado del target.
+
+El ranking por RMSE test fue: XGBoost (25564.80), Random Forest (28929.45), MLP (29390.27), árbol podado (40386.27) y árbol sin poda (42453.07). La MLP empeoró frente a Random Forest en 460.82 (1.59%) y frente a XGBoost en 3825.47 (14.96%), aunque superó a ambos árboles. En un dataset tabular de 1460 observaciones, este resultado es razonable: los modelos basados en árboles pueden ser muy competitivos frente a redes neuronales.
+
+### Respuesta académica
+
+La MLP utilizada estuvo formada por `Dense(128)-Dense(64)-Dense(32)-Dense(1)` con activación ReLU en las capas ocultas, salida lineal y optimización mediante Adam. El aprendizaje se realizó mediante backpropagation, proceso por el cual el error calculado en la salida se propaga hacia atrás para actualizar los pesos de la red.
+
+El modelo obtuvo un RMSE de 29390.27 en test. Comparado con Random Forest (28929.45), la MLP empeoró el desempeño en 1.59%; comparada con XGBoost (25564.80), empeoró en 14.96%. Este comportamiento es razonable en un dataset tabular de 1460 observaciones, donde modelos basados en árboles pueden ser muy competitivos frente a redes neuronales. La MLP no debe considerarse inválida: su desempeño depende de arquitectura, escalado, regularización, entrenamiento y características del dataset.

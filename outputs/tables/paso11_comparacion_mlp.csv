@@ -1,0 +1,3 @@
+comparacion,delta_rmse,delta_rmse_pct
+mlp_vs_xgboost,3825.474309710007,14.963834294459598
+mlp_vs_random_forest,460.82430971000576,1.592924544745945

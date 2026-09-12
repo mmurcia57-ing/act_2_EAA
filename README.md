@@ -41,3 +41,6 @@ Se evaluó Random Forest para regresión y se completó la comparación con los 
 ## Paso 10
 
 Se evaluó XGBoost para regresión y se completó la comparación con árboles y Random Forest. MLP todavía está pendiente.
+## Paso 11
+
+Se evaluó una MLP de regresión y se completó la comparación de los cinco modelos de regresión. La clasificación aún no se ha iniciado.

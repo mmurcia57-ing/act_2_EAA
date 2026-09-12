@@ -1,0 +1,2 @@
+modelo,implementacion,arquitectura,activacion,solver_optimizador,max_iter_epochs,iteraciones_epochs_reales,batch_size,early_stopping,n_train,n_test,mae_train,rmse_train,r2_train,mae_test,rmse_test,r2_test,train_seconds,random_state
+MLPRegressor_Keras,TensorFlow/Keras,Dense(128)-Dense(64)-Dense(32)-Dense(1),ReLU en capas ocultas; linear en salida,Adam,500,55,32,"val_loss, patience=30, restore_best_weights=True",1168,292,9191.9892578125,12679.088295299469,0.9730475544929504,17913.03125,29390.274309710006,0.8873857259750366,10.686658200109378,42

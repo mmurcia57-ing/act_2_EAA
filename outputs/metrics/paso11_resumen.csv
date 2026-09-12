@@ -1,0 +1,2 @@
+implementacion_mlp,arquitectura,rmse_tree_unpruned,rmse_tree_pruned,rmse_random_forest,rmse_xgboost,rmse_mlp,mae_mlp,r2_mlp,rmse_train_mlp,gap_train_test_mlp,delta_mlp_vs_xgb_abs,delta_mlp_vs_xgb_pct,delta_mlp_vs_rf_abs,delta_mlp_vs_rf_pct,train_seconds,iterations_or_epochs
+TensorFlow/Keras,Dense(128)-Dense(64)-Dense(32)-Dense(1),42453.07,40386.27,28929.45,25564.8,29390.274309710006,17913.03125,0.8873857259750366,12679.088295299469,16711.186014410538,3825.474309710007,14.963834294459598,460.82430971000576,1.592924544745945,10.686658200109378,55
