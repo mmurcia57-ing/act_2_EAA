@@ -1,0 +1,15 @@
+criterion,status,evidence,notes
+EDA,PASS,outputs/tables/paso02_missing_resumen.csv; outputs/tables/paso02_tipos_variables.csv,Archivos presentes
+missing,PASS,outputs/tables/paso06_consistencia_estructural.csv; outputs/tables/paso06_missing_antes_despues.csv,Archivos presentes
+regression,PASS,outputs/tables/paso26_resumen_regresion.csv,Archivos presentes
+classification,PASS,outputs/tables/paso26_resumen_clasificacion.csv,Archivos presentes
+clustering,PASS,outputs/tables/paso26_resumen_clustering.csv,Archivos presentes
+anomaly_detection,PASS,outputs/tables/paso26_resumen_anomalias.csv,Archivos presentes
+q_learning,PASS,outputs/tables/paso26_resumen_qlearning.csv,Archivos presentes
+rlhf,PASS,outputs/tables/paso26_resumen_rlhf.csv,Archivos presentes
+documentation,PASS,docs/GUIA_PASO_A_PASO.md; README.md,Archivos presentes
+max_pages_plan,PASS,outputs/tables/paso26_prioridad_informe.csv,Archivos presentes
+target_leakage_check,PASS,outputs/tables/paso26_decisiones_metodologicas.csv,Archivos presentes
+numeric_consistency,PASS,Paso 26 summaries,Métricas clave coinciden con outputs previos
+rubric,PASS,outputs/tables/paso26_check_rubrica.csv,Todos los criterios cubiertos
+git_clean_before_commit,PASS,Validación previa al commit,El estado se revisa desde PowerShell antes de commit
