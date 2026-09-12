@@ -1,0 +1,2 @@
+rmse_tree_unpruned,rmse_tree_pruned,rmse_random_forest,mae_random_forest,r2_random_forest,rmse_train_random_forest,gap_train_test,improvement_vs_unpruned_abs,improvement_vs_unpruned_pct,improvement_vs_pruned_abs,improvement_vs_pruned_pct,n_estimators,train_seconds
+42453.07,40386.27,28929.447553247075,17410.114805936075,0.8908895250176084,11063.975044452081,17865.472508794992,13523.622446752925,31.855464037707815,11456.822446752922,28.368112347966086,300,12.961883699987084

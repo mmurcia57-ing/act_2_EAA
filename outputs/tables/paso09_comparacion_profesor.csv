@@ -1,0 +1,2 @@
+modelo,rmse_dataset,rmse_profesor,diferencia_absoluta,diferencia_pct,comentario
+random_forest,28929.447553247075,27588.9,1340.5475532470737,4.859010519618664,"diferencia documentada; pueden influir split, R/Python, encoding, missing, parámetros y versiones"

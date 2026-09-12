@@ -169,3 +169,26 @@ Frente a la referencia del profesor, el baseline difiere en 1450.87 (3.54%) resp
 Una menor complejidad no garantiza automáticamente un menor error de test. Si el RMSE podado aumenta, la poda pudo ser demasiado agresiva o eliminar divisiones útiles, introduciendo mayor sesgo y posible underfitting. Si disminuye, como en nuestro resultado, la poda redujo parte del sobreajuste y mejoró la generalización. La decisión debe basarse en validación y test, no en asumir que podar siempre mejora.
 
 El árbol sin poda obtuvo RMSE 42453.07 y el podado 40386.27, por lo que la poda mejoró en este experimento. La referencia del profesor muestra el caso contrario (41002.2 a 42927.25); esa diferencia confirma que el efecto depende de los datos, el preprocesamiento, la selección de alpha y la evaluación. Todavía no se ha ejecutado Random Forest ni se avanza al Paso 09.
+## Paso 09 - Random Forest para regresión
+
+### Metodología y modelo
+
+Random Forest combina múltiples árboles de decisión. Cada árbol se entrena sobre una muestra bootstrap y, en cada división, considera un subconjunto aleatorio de variables. Esto reduce la correlación entre árboles y, al promediar sus predicciones, suele reducir la varianza frente a un árbol individual. No garantiza ser siempre mejor, pero normalmente generaliza de forma más estable.
+
+Se mantuvo el split externo de 1168 train y 292 test, con `random_state=42`, se excluyeron `SalePrice` e `Id`, y se conservaron los demás 79 predictores originales. El preprocesamiento se ajustó solo sobre `X_train` dentro del pipeline: mediana para numéricas y categoría `None` más `OneHotEncoder(handle_unknown="ignore")` para categóricas. Se obtuvieron 301 features transformadas.
+
+La configuración fue `RandomForestRegressor(n_estimators=300, random_state=42, n_jobs=-1)`, sin búsqueda agresiva de hiperparámetros. El entrenamiento tomó 12.96 segundos.
+
+### Resultados y comparación
+
+En train, Random Forest obtuvo MAE 6471.35, RMSE 11063.98 y R² 0.9795. En test obtuvo MAE 17410.11, RMSE 28929.45 y R² 0.8909, con una brecha RMSE train-test de 17865.47.
+
+Frente al árbol sin poda, redujo el RMSE test en 13523.62 (31.86%). Frente al árbol podado, lo redujo en 11456.82 (28.37%). Su RMSE fue menor que el de ambos árboles en este experimento. Comparado con la referencia del profesor (27588.9), fue 1340.55 mayor (4.86%). La diferencia puede explicarse por split, implementación R/Python, encoding, tratamiento de missing, parámetros del bosque o versiones de librerías; no se forzó coincidencia.
+
+Las diez importancias transformadas principales fueron `OverallQual`, `GrLivArea`, `TotalBsmtSF`, `2ndFlrSF`, `BsmtFinSF1`, `1stFlrSF`, `LotArea`, `GarageArea`, `GarageCars` y `YearBuilt`. La agregación por variable original suma correctamente los niveles one-hot de cada categórica; las features categóricas aparecen descompuestas por nivel en la tabla no agregada. La importancia no implica causalidad y puede variar con el split y la configuración del bosque.
+
+### Respuesta académica
+
+El Random Forest combina múltiples árboles, cada uno entrenado con bootstrap y con subconjuntos aleatorios de variables en las divisiones. Al promediar, reduce la varianza y la sensibilidad de un árbol individual a pequeñas variaciones del dataset. En nuestros resultados, el RMSE fue 28929.45, mejor que 42453.07 del árbol sin poda y 40386.27 del árbol podado, con mejoras de 31.86% y 28.37%, respectivamente.
+
+La referencia del profesor es 27588.9; nuestro valor es 1340.55 mayor, una diferencia de 4.86%. No debe concluirse que Random Forest siempre es mejor ni que la diferencia sea un error: pueden cambiar el split, la implementación, el encoding, el tratamiento de missing, los parámetros y las versiones. El gap train-test de 17865.47 muestra cierta diferencia de generalización, aunque menor que el sobreajuste extremo del árbol sin poda. Boosting todavía no se ha ejecutado.

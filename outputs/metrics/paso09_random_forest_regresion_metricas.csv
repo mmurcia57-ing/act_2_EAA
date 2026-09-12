@@ -1,0 +1,2 @@
+modelo,n_estimators,n_train,n_test,mae_train,rmse_train,r2_train,mae_test,rmse_test,r2_test,train_seconds,random_state
+RandomForestRegressor,300,1168,292,6471.354626141552,11063.975044452081,0.9794768195437779,17410.114805936075,28929.447553247075,0.8908895250176084,12.961883699987084,42

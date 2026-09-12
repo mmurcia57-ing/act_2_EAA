@@ -35,3 +35,6 @@ Se entrenó el primer modelo supervisado: un árbol de regresión baseline con p
 ## Paso 08
 
 Se evaluó la poda del árbol de regresión y se comparó contra el baseline y la referencia del profesor. Random Forest todavía no se ha ejecutado.
+## Paso 09
+
+Se evaluó Random Forest para regresión y se completó la comparación con los árboles. Boosting todavía no se ha ejecutado.

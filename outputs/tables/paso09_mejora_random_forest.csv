@@ -1,0 +1,3 @@
+comparacion,delta_rmse,delta_rmse_pct
+random_forest_vs_arbol_sin_poda,-13523.622446752925,-31.855464037707815
+random_forest_vs_arbol_podado,-11456.822446752922,-28.368112347966086
