@@ -1,0 +1,8 @@
+metrica,valor_dataset,valor_referencia_profesor,diferencia,coincide_aproximadamente,comentario
+SalePrice min,34900.0,34900,0.0,True,coincide con la referencia
+SalePrice median,163000.0,163000,0.0,True,coincide con la referencia
+SalePrice mean,180921.19589041095,180921,0.19589041094877757,True,coincide con la referencia
+SalePrice max,755000.0,755000,0.0,True,coincide con la referencia
+LotFrontage missing,259.0,259,0.0,True,coincide con la referencia
+MasVnrArea missing,8.0,8,0.0,True,coincide con la referencia
+GarageYrBlt missing,81.0,81,0.0,True,coincide con la referencia

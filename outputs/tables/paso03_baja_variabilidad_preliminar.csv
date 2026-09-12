@@ -1,0 +1,6 @@
+variable,valor_dominante,frecuencia_dominante,porcentaje_dominante,decision_preliminar,justificacion
+PoolArea,0,1453,99.52054794520548,revisar,más del 95% de observaciones en un mismo valor; evaluar transformación o exclusión
+3SsnPorch,0,1436,98.35616438356163,revisar,más del 95% de observaciones en un mismo valor; evaluar transformación o exclusión
+LowQualFinSF,0,1434,98.21917808219179,revisar,más del 95% de observaciones en un mismo valor; evaluar transformación o exclusión
+MiscVal,0,1408,96.43835616438356,revisar,más del 95% de observaciones en un mismo valor; evaluar transformación o exclusión
+KitchenAbvGr,1,1392,95.34246575342465,revisar,más del 95% de observaciones en un mismo valor; evaluar transformación o exclusión

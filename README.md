@@ -17,3 +17,6 @@ Dataset: `housing_train.csv`, referencia [USA Housing Dataset en Kaggle](https:/
 ## Paso 02
 
 La inspección estructural fue ejecutada. Sus tablas, métricas y el histograma se encuentran en `outputs/tables/`, `outputs/metrics/` y `outputs/figures/`. Todavía no se ha realizado imputación, encoding ni modelado.
+## Paso 03
+
+Se completó la estadística descriptiva de variables numéricas. Aún no se han eliminado variables; la siguiente decisión dependerá del análisis de correlaciones y missing. Los artefactos están en `outputs/tables/`, `outputs/metrics/` y `outputs/figures/`.
