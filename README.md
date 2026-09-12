@@ -72,3 +72,7 @@ Se completó el cierre comparativo de clasificación. XGBoost obtuvo la mejor ac
 ## Paso 19
 
 Se ejecutó la selección de K mediante codo y silhouette usando variables numéricas escaladas. El clustering definitivo aún no se ha ejecutado; el siguiente paso será K-Means.
+
+## Paso 20
+
+Se completó el K-Means definitivo con K=2 y se caracterizaron los perfiles de vivienda, diferencias entre centroides y distribución descriptiva de `SalePrice`. El siguiente paso será clustering jerárquico.

@@ -443,6 +443,24 @@ La silhouette máxima fue para K=2, con 0.1424. La inertia descendió de 45572.5
 
 Para K=2, los tamaños fueron: cluster 0 = 769 viviendas (52.67%) y cluster 1 = 691 viviendas (47.33%). No hay un cluster degenerado en esta configuración. La recomendación es exploratoria; el K-Means definitivo, la interpretación económica de los clusters y su comparación posterior con precios quedan para la siguiente etapa.
 
+## Paso 20 - K-Means para segmentación de viviendas
+
+Se ejecutó el K-Means definitivo con K=2, seleccionado en el Paso 19 por presentar el mayor índice de silueta. Se usaron exactamente las 36 variables numéricas de características, excluyendo `Id`, `SalePrice` y `PriceGroup`. Los valores faltantes se imputaron con la mediana y la matriz se estandarizó con `StandardScaler` sobre las 1460 viviendas.
+
+K-Means asignó 769 viviendas al cluster 0 (52.67%) y 691 al cluster 1 (47.33%), con silhouette 0.1424. Los centroides representan el perfil promedio de cada grupo en la escala original. Las variables con mayor diferencia estandarizada fueron `FullBath`, `OverallQual`, `YearBuilt`, `GarageYrBlt`, `GarageCars`, `GrLivArea`, `YearRemodAdd`, `GarageArea`, `TotalBsmtSF` y `TotRmsAbvGrd`.
+
+El cluster 0 representa viviendas, en promedio, más pequeñas, antiguas y de menor calidad: `OverallQual` 5.21, `YearBuilt` 1951.85, `GrLivArea` 1225.66, `FullBath` 1.18 y `GarageCars` 1.33. El cluster 1 representa viviendas más grandes, nuevas y de mayor calidad: `OverallQual` 7.09, `YearBuilt` 1992.88, `GrLivArea` 1837.99, `FullBath` 1.99 y `GarageCars` 2.25.
+
+`SalePrice` no participó en el entrenamiento. Después del clustering se observó que el cluster 0 tuvo media 131767.01 y mediana 132500, mientras que el cluster 1 tuvo media 235623.90 y mediana 214000. Esto es una comparación descriptiva posterior y no significa que los clusters predigan `SalePrice`.
+
+El cruce exploratorio con `PriceGroup` mostró que el cluster 0 contiene 122 viviendas de grupo1 (15.86%), 647 de grupo2 (84.14%) y ninguna de grupo3. El cluster 1 contiene 1 de grupo1 (0.14%), 681 de grupo2 (98.55%) y 9 de grupo3 (1.30%). No se calculó accuracy porque clustering es no supervisado y no se construyó para reproducir artificialmente las etiquetas de precio.
+
+La proyección PCA se utilizó únicamente para visualización: las dos primeras componentes explicaron 19.79% y 8.90%, en total 28.69% de la varianza. Las limitaciones son un silhouette bajo, separación imperfecta, la suposición de K-Means de clusters aproximadamente compactos/esféricos, la sensibilidad al escalado y el carácter exploratorio del resultado. Los clusters no equivalen a clases supervisadas.
+
+### Respuesta académica
+
+El K-Means definitivo utilizó K=2, seleccionado en el Paso 19 por presentar el mayor índice de silueta. Los clusters se caracterizaron a partir de sus centroides y de las variables con mayor diferencia estandarizada. `SalePrice` no participó en el entrenamiento; se utilizó únicamente después para interpretar si los perfiles encontrados presentan diferencias de precio. El cluster 0 corresponde objetivamente a viviendas más antiguas, pequeñas y de menor calidad, mientras el cluster 1 agrupa viviendas más nuevas, grandes y de mayor calidad. Esta segmentación es exploratoria y no debe interpretarse como una clasificación supervisada.
+
 ### Respuesta académica
 
 Se evaluaron valores de K entre 2 y 10 utilizando tanto la inercia como el índice de silueta. El método del codo permitió observar que la reducción de la variabilidad interna se vuelve progresivamente menor después de los primeros valores, con un codo visual aproximado en K=3–4, mientras que el índice de silueta alcanzó su máximo en K=2 con 0.1424. Por ello, el K seleccionado fue 2: combina el mejor valor de silhouette con una segmentación interpretable y no impone K=3 por los grupos de precio.

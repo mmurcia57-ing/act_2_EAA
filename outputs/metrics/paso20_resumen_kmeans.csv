@@ -1,0 +1,2 @@
+n_clusters,silhouette,cluster_0_size,cluster_1_size,cluster_0_pct,cluster_1_pct,saleprice_mean_cluster_0,saleprice_mean_cluster_1,saleprice_median_cluster_0,saleprice_median_cluster_1,random_state,n_init
+2,0.14237657103136558,769,691,0.5267123287671233,0.47328767123287674,131767.01170351106,235623.8986975398,132500.0,214000.0,42,20
