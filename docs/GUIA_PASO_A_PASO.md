@@ -461,6 +461,24 @@ La proyección PCA se utilizó únicamente para visualización: las dos primeras
 
 El K-Means definitivo utilizó K=2, seleccionado en el Paso 19 por presentar el mayor índice de silueta. Los clusters se caracterizaron a partir de sus centroides y de las variables con mayor diferencia estandarizada. `SalePrice` no participó en el entrenamiento; se utilizó únicamente después para interpretar si los perfiles encontrados presentan diferencias de precio. El cluster 0 corresponde objetivamente a viviendas más antiguas, pequeñas y de menor calidad, mientras el cluster 1 agrupa viviendas más nuevas, grandes y de mayor calidad. Esta segmentación es exploratoria y no debe interpretarse como una clasificación supervisada.
 
+## Paso 21 - Clustering jerárquico
+
+Se aplicó clustering jerárquico aglomerativo sobre las mismas 36 variables numéricas estandarizadas del K-Means. `Id`, `SalePrice` y `PriceGroup` quedaron fuera del ajuste. El método Ward fusiona iterativamente los grupos buscando minimizar el aumento de la variabilidad interna; el `linkage` define el criterio de unión. El dendrograma muestra esta jerarquía y se cortó en 2 clusters.
+
+El clustering jerárquico produjo 556 viviendas en el cluster 0 (38.08%) y 904 en el cluster 1 (61.92%), con silhouette 0.1150. Sus variables más discriminantes fueron `YearBuilt`, `FullBath`, `OverallQual`, `GarageYrBlt`, `GarageCars`, `YearRemodAdd`, `GarageArea`, `GrLivArea`, `TotalBsmtSF` y `TotRmsAbvGrd`.
+
+Los labels son arbitrarios y no deben compararse por número directamente con K-Means. En el jerárquico, el cluster 0 representa viviendas más nuevas, grandes y de mayor calidad: `YearBuilt` medio 1995.76, `OverallQual` 7.22, `FullBath` 2.01, `GrLivArea` 1835.94 y `GarageCars` 2.29. El cluster 1 representa viviendas más antiguas, pequeñas y de menor calidad: `YearBuilt` medio 1956.21, `OverallQual` 5.41, `FullBath` 1.29, `GrLivArea` 1318.36 y `GarageCars` 1.45.
+
+La comparación con K-Means produjo ARI=0.5735, una coincidencia parcial entre las segmentaciones. La tabla de contingencia muestra que el cluster 0 de K-Means se repartió en 21 casos del jerárquico 0 y 748 del jerárquico 1, mientras el cluster 1 de K-Means se repartió en 535 y 156 casos, respectivamente. K-Means obtuvo silhouette 0.1424 frente a 0.1150 del jerárquico.
+
+Después del clustering, `SalePrice` tuvo media 241919.74 y mediana 220000 en el cluster jerárquico 0, frente a media 143404.39 y mediana 137000 en el cluster 1. El cruce descriptivo con `PriceGroup` mostró: cluster 0, grupo1=1 (0.18%), grupo2=546 (98.20%) y grupo3=9 (1.62%); cluster 1, grupo1=122 (13.50%), grupo2=782 (86.50%) y grupo3=0. No se calculó accuracy ni se afirmó que los clusters predigan grupos de precio.
+
+### Respuesta académica
+
+El clustering jerárquico produjo dos grupos usando Ward sobre variables numéricas estandarizadas. Sus resultados se compararon con K-Means mediante tamaños, perfiles, silhouette y Adjusted Rand Index. K-Means obtuvo mayor silhouette (0.1424 frente a 0.1150), mientras que el ARI de 0.5735 indica coincidencia parcial. La diferencia de tamaños y perfiles confirma que ambos métodos capturan una estructura relacionada, pero no idéntica.
+
+Las limitaciones son la sensibilidad del método a la distancia y al `linkage`, la importancia crítica del escalado, la dificultad de interpretar un dendrograma grande y el carácter exploratorio de los clusters. Las etiquetas numéricas de los grupos no tienen significado por sí solas.
+
 ### Respuesta académica
 
 Se evaluaron valores de K entre 2 y 10 utilizando tanto la inercia como el índice de silueta. El método del codo permitió observar que la reducción de la variabilidad interna se vuelve progresivamente menor después de los primeros valores, con un codo visual aproximado en K=3–4, mientras que el índice de silueta alcanzó su máximo en K=2 con 0.1424. Por ello, el K seleccionado fue 2: combina el mejor valor de silhouette con una segmentación interpretable y no impone K=3 por los grupos de precio.

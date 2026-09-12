@@ -1,0 +1,2 @@
+n_clusters,silhouette,cluster_0_size,cluster_1_size,linkage
+2,0.1150338267045204,556,904,ward

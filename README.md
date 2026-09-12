@@ -76,3 +76,7 @@ Se ejecutó la selección de K mediante codo y silhouette usando variables numé
 ## Paso 20
 
 Se completó el K-Means definitivo con K=2 y se caracterizaron los perfiles de vivienda, diferencias entre centroides y distribución descriptiva de `SalePrice`. El siguiente paso será clustering jerárquico.
+
+## Paso 21
+
+Se evaluó clustering jerárquico aglomerativo con Ward y K=2, usando las mismas variables y preprocesamiento de K-Means. También se compararon tamaños, perfiles, silhouette y ARI. El siguiente paso será comparar clusters con grupos de precio.
