@@ -348,3 +348,35 @@ Las importancias principales fueron `GrLivArea`, `TotalBsmtSF`, `1stFlrSF`, `Gar
 Random Forest mejoró la accuracy y el macro F1 respecto al árbol, pero no la balanced accuracy. El ensamble concentró aún más su buen desempeño en grupo2: el recall pasó a 99.25%, mientras grupo1 bajó a 48% y grupo3 permaneció en 0%. Por ello, no basta con observar la accuracy global; la clasificación sigue limitada por el fuerte desbalance.
 
 Comparado con el árbol de decisión, Random Forest es más robusto frente a variaciones del dataset y reduce varianza al promediar muchos árboles, pero puede ser menos interpretable. En este experimento obtuvo mejor accuracy y macro F1, pero peor balanced accuracy, y no resolvió la clase extremadamente minoritaria. No se balancearon las clases todavía.
+
+## Paso 16 - XGBoost para clasificación
+
+### Metodología
+
+Se aplicó XGBoost como baseline de boosting para clasificación multiclase. Boosting construye árboles pequeños de forma secuencial: cada nuevo árbol intenta corregir los errores acumulados por el conjunto anterior. Esto contrasta con Random Forest, que entrena muchos árboles de forma independiente sobre muestras y variables aleatorias y luego promedia sus predicciones. En este paso no se hizo tuning exhaustivo, no se usaron pesos de clase, SMOTE ni oversampling.
+
+Se reutilizó exactamente el split estratificado del Paso 13: 1168 observaciones de entrenamiento y 292 de prueba, con 25 casos de grupo1, 265 de grupo2 y 2 de grupo3 en test. Las clases se codificaron explícitamente como grupo1=0, grupo2=1 y grupo3=2. El preprocesamiento quedó dentro del pipeline: mediana para numéricas e imputación constante `None` seguida de one-hot encoding para categóricas, ajustado únicamente con entrenamiento.
+
+La configuración fue `n_estimators=300`, `max_depth=3`, `learning_rate=0.05`, `subsample=0.8`, `colsample_bytree=0.8`, objetivo `multi:softprob`, `num_class=3`, `eval_metric=mlogloss`, `random_state=42` y `n_jobs=-1`.
+
+### Resultados
+
+En test, XGBoost obtuvo accuracy 0.9623, balanced accuracy 0.5829 y macro F1 0.5960. La matriz de confusión, con filas reales y columnas predichas, fue:
+
+```text
+[[19,  6,  0],
+ [ 3,262,  0],
+ [ 0,  2,  0]]
+```
+
+Los recalls por grupo fueron 0.7600 para grupo1, 0.9887 para grupo2 y 0.0000 para grupo3. Frente al árbol, XGBoost mejoró accuracy en 0.0479, balanced accuracy en 0.0659 y macro F1 en 0.0897. Frente a Random Forest, mejoró accuracy en 0.0205, balanced accuracy en 0.0921 y macro F1 en 0.0680; además, el recall de grupo1 aumentó 0.2800 y el de grupo2 disminuyó 0.0038, mientras grupo3 no cambió.
+
+### Interpretación, desbalance y limitaciones
+
+El modelo tuvo accuracy de entrenamiento 1.0000 frente a 0.9623 en test, por lo que existe una brecha de 0.0377 que debe vigilarse como posible sobreajuste. Grupo2 representa aproximadamente el 91% del dataset; por ello, la accuracy global puede ocultar el desempeño de las clases minoritarias y deben priorizarse balanced accuracy, macro F1 y recall por clase.
+
+XGBoost no detectó grupo3. Como solo hay 7 casos de grupo3 en train y 2 en test, los posibles resultados en test son únicamente 0%, 50% o 100%; por tanto, el 0% observado no debe interpretarse como una estimación estable ni justificar cambios ad hoc al baseline. Las importancias de variables son asociaciones útiles para inspección, no evidencia de causalidad. También debe considerarse que el tamaño reducido de la clase minoritaria limita la evaluación y que no se ha probado todavía balanceo, ponderación ni ajuste de hiperparámetros.
+
+### Respuesta académica
+
+Se repitió el ejercicio aplicando boosting mediante XGBClassifier multiclase. Con la configuración indicada obtuvo accuracy 0.9623, balanced accuracy 0.5829, macro F1 0.5960 y recalls de 0.7600, 0.9887 y 0.0000 para grupos 1, 2 y 3. En este split superó al árbol y a Random Forest en las tres métricas globales comparadas, pero no resolvió grupo3; la conclusión debe limitarse a este split y a sus soportes, especialmente los 2 casos de grupo3 en test.

@@ -56,3 +56,7 @@ Se evaluó el árbol de clasificación y se generó la matriz de confusión. El 
 ## Paso 15
 
 Se evaluó Random Forest para clasificación y se comparó con el árbol. El siguiente clasificador será Boosting.
+
+## Paso 16
+
+Se ejecutó XGBoost para clasificación multiclase y se comparó con árbol y Random Forest. El siguiente paso será SVM.

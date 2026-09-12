@@ -1,0 +1,2 @@
+modelo,version_xgboost,n_estimators,max_depth,learning_rate,subsample,colsample_bytree,n_train,n_test,accuracy,balanced_accuracy,macro_precision,macro_recall,macro_f1,weighted_f1,train_seconds,random_state
+XGBClassifier,3.4.1,300,3,0.05,0.8,0.8,1168,292,0.9623287671232876,0.5828930817610063,0.6113355780022447,0.5828930817610063,0.5959832968781069,0.9580964651596084,1.3377949001733214,42

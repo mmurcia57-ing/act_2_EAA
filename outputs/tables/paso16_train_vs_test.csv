@@ -1,0 +1,3 @@
+conjunto,accuracy,balanced_accuracy,macro_f1
+train,1.0,1.0,1.0
+test,0.9623287671232876,0.5828930817610063,0.5959832968781069
