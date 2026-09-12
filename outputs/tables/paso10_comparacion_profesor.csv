@@ -1,0 +1,2 @@
+modelo,rmse_dataset,rmse_profesor,diferencia_absoluta,diferencia_pct,comentario
+xgboost,25564.798297659225,27588.9,2024.1017023407767,7.336652430291808,"diferencia documentada; pueden influir split, R/Python, encoding, missing, parámetros y versiones"
