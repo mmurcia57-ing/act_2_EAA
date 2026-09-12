@@ -1,0 +1,5 @@
+modelo,ventajas,desventajas
+arbol,interpretable; simple,alta varianza; peor desempeño general
+random_forest,robusto; buen accuracy,no detectó grupo3; balanced accuracy baja
+xgboost,mayor accuracy; buen grupo1; buen desempeño global,no detectó grupo3; más hiperparámetros
+svm_linear_c1,mejor balanced accuracy; mejor macro F1; mejor resultado en minoritarias,requiere escalado; menos interpretable; sensible a C/kernel

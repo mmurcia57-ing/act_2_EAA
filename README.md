@@ -64,3 +64,7 @@ Se ejecutó XGBoost para clasificación multiclase y se comparó con árbol y Ra
 ## Paso 17
 
 Se evaluaron SVM lineal y RBF con C=0.1, 1 y 10. El siguiente paso será el cierre comparativo de clasificación.
+
+## Paso 18
+
+Se completó el cierre comparativo de clasificación. XGBoost obtuvo la mejor accuracy; SVM lineal con C=1 obtuvo la mejor balanced accuracy y macro F1. El siguiente bloque será clustering.

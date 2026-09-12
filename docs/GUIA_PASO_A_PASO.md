@@ -406,4 +406,29 @@ Se entrenaron seis SVM multiclase: tres con kernel lineal y C=0.1, 1 y 10, y tre
 | rbf | 1 | 0.9658 | 0.5962 | 0.6049 |
 | rbf | 10 | 0.9692 | 0.6096 | 0.6134 |
 
+## Paso 18 - Cierre comparativo del problema de clasificación
+
+Se cerró el bloque de clasificación comparando cuatro resultados ya entrenados: árbol de decisión, Random Forest, XGBoost y SVM lineal con C=1. No se entrenaron modelos nuevos ni se modificó el split.
+
+La accuracy global quedó encabezada por XGBoost (0.9623), seguido por SVM (0.9486), Random Forest (0.9418) y árbol (0.9144). Sin embargo, grupo2 representa 1328 de 1460 observaciones, aproximadamente el 91%; por eso una accuracy alta puede ocultar un mal desempeño en las clases minoritarias. La balanced accuracy y el macro F1 dan el mismo peso a cada grupo y son más informativos aquí.
+
+| Modelo | Accuracy | Balanced accuracy | Macro F1 | Grupo1 recall | Grupo2 recall | Grupo3 recall |
+|---|---:|---:|---:|---:|---:|---:|
+| Árbol | 0.9144 | 0.5170 | 0.5063 | 0.6000 | 0.9509 | 0.0000 |
+| Random Forest | 0.9418 | 0.4908 | 0.5280 | 0.4800 | 0.9925 | 0.0000 |
+| XGBoost | 0.9623 | 0.5829 | 0.5960 | 0.7600 | 0.9887 | 0.0000 |
+| SVM lineal C=1 | 0.9486 | 0.7916 | 0.8015 | 0.9200 | 0.9547 | 0.5000 |
+
+SVM fue el mejor modelo para grupo1 y obtuvo la mayor balanced accuracy y macro F1. Para grupo2, Random Forest tuvo el mayor recall (0.9925), seguido de XGBoost (0.9887), SVM (0.9547) y árbol (0.9509). Para grupo3, SVM fue el único que identificó un caso (1/2=50%); los otros modelos obtuvieron 0/2.
+
+La comparación con el profesor debe considerar que su matriz de Random Forest usa soportes 24/266/2, mientras nuestro split fijo usa 25/265/2. Por tanto, las diferencias no deben presentarse como errores: son evaluaciones con particiones distintas. La tabla correspondiente está en `outputs/tables/paso18_comparacion_profesor.csv`.
+
+Ventajas y limitaciones: el árbol es simple e interpretable, pero tiene mayor varianza; Random Forest es robusto, aunque no detectó grupo3; XGBoost obtuvo la mayor accuracy, pero tampoco detectó grupo3 y requiere más hiperparámetros; SVM fue el más equilibrado, aunque requiere escalado y es menos interpretable. En consecuencia, si el objetivo es únicamente accuracy global se elegiría XGBoost. Si se busca desempeño equilibrado entre clases, se recomienda SVM lineal con C=1 para este experimento.
+
+Grupo3 tiene solo 9 observaciones en el dataset completo, 7 en train y 2 en test. Con dos casos, los resultados posibles son 0%, 50% o 100%; su recall no debe utilizarse como estimador estable del comportamiento futuro. Como recomendaciones para una etapa posterior quedan recopilar más observaciones, evaluar `class_weight`, oversampling solo sobre train, SMOTE con cautela, revisar umbrales y usar validación cruzada estratificada si el soporte lo permite.
+
+### Respuesta académica final
+
+XGBoost obtuvo la mayor exactitud global (96.23%), mientras que SVM lineal con C=1 obtuvo la mayor balanced accuracy (79.16%) y macro F1 (80.15%). Dado el fuerte desbalance, balanced accuracy y macro F1 son métricas más informativas que accuracy global. SVM también fue el único modelo evaluado que identificó uno de los dos inmuebles del grupo3 en test, aunque este resultado no es estadísticamente estable por el reducido soporte de la clase. Por ello, XGBoost es el mejor por accuracy, pero SVM lineal con C=1 es el modelo recomendado cuando se prioriza equilibrio entre clases.
+
 El mejor balanced accuracy fue el SVM lineal con C=1 (0.7916). En el kernel lineal, aumentar C de 0.1 a 1 redujo accuracy pero elevó claramente balanced accuracy y macro F1; al pasar a C=10, ambas métricas de equidad descendieron. En RBF, C=0.1 produjo bajo desempeño, mientras C=1 y C=10 lo mejoraron, aunque sin alcanzar al lineal con C=1. Así, en este split el kernel lineal rindió mejor según la métrica prioritaria. El SVM superó al árbol, Random Forest y XGBoost en balanced accuracy y macro F1, pero no en accuracy global frente a XGBoost.

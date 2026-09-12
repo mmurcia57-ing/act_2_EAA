@@ -1,0 +1,4 @@
+grupo,arbol_recall,random_forest_recall,xgboost_recall,svm_linear_c1_recall,mejor_modelo_grupo,mejor_recall
+grupo1,0.6,0.48,0.76,0.92,svm_linear_c1,0.92
+grupo2,0.9509433962264152,0.9924528301886792,0.9886792452830188,0.9547169811320756,random_forest,0.9924528301886792
+grupo3,0.0,0.0,0.0,0.5,svm_linear_c1,0.5

@@ -1,0 +1,2 @@
+best_accuracy_model,best_accuracy,best_balanced_model,best_balanced_accuracy,best_macro_f1_model,best_macro_f1,best_grupo1_model,best_grupo1_recall,best_grupo2_model,best_grupo2_recall,best_grupo3_model,best_grupo3_recall,recommended_model_balanced,minority_class,minority_class_total
+xgboost,0.9623287671232876,svm_linear_c1,0.7915723270440251,svm_linear_c1,0.8015141821283857,svm_linear_c1,0.92,random_forest,0.9924528301886792,svm_linear_c1,0.5,svm_linear_c1,grupo3,9

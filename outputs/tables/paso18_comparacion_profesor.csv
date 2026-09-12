@@ -1,0 +1,3 @@
+modelo,grupo1_recall_profesor,grupo2_recall_profesor,grupo3_recall_profesor,grupo1_recall_nuestro,grupo2_recall_nuestro,grupo3_recall_nuestro,soporte_profesor,soporte_nuestro,nota
+arbol,0.44,0.962,0.0,0.6,0.9509433962264152,0.0,24/266/2,25/265/2,splits distintos; no es un error
+random_forest,0.542,0.996,0.5,0.48,0.9924528301886792,0.0,24/266/2,25/265/2,splits distintos; no es un error
