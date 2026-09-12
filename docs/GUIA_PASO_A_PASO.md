@@ -520,3 +520,19 @@ La analogía con fraude financiero es conceptual: Isolation Forest puede detecta
 Isolation Forest se utilizó como técnica no supervisada para detectar viviendas estructuralmente atípicas. El modelo se entrenó sin `SalePrice`, que se reservó para interpretación posterior. Se detectaron 70 anomalías (4.79%), diferenciadas principalmente por superficie construida, número de habitaciones, área de lote, sótano y baños. Este enfoque es análogo a la detección de fraude financiero, donde una transacción puede ser sospechosa por una combinación poco frecuente de atributos; no obstante, una anomalía no implica necesariamente fraude.
 
 Las limitaciones son que `contamination="auto"` no representa un porcentaje real conocido, no existe ground truth de anomalías, los casos raros pueden ser legítimos, el resultado depende de las variables disponibles y no pueden calcularse precision/recall reales de anomalías.
+
+## Paso 24 - Q-learning
+
+Se implementó un ejemplo de reinforcement learning en un entorno Gridworld 4x4. El agente comienza en la esquina superior izquierda (estado 0) y debe llegar a la esquina inferior derecha (estado 15). Cada posición es un estado; las acciones son arriba, derecha, abajo e izquierda. Si el agente intenta salir de la cuadrícula permanece en el mismo estado y recibe la recompensa normal de -1.
+
+El agente recibe -1 por cada paso normal y +10 al alcanzar la meta. La política es la regla que indica qué acción elegir en cada estado. La Q-table almacena la utilidad estimada de cada par estado-acción y tiene forma `(16, 4)`. Q-learning actualiza sus valores mediante `Q(s,a) ← Q(s,a) + alpha [reward + gamma max Q(s',a') - Q(s,a)]`; si el siguiente estado es terminal no se añade valor futuro. `alpha=0.1` controla la tasa de aprendizaje y `gamma=0.95` pondera recompensas futuras.
+
+Se entrenó durante 2000 episodios con `epsilon-greedy`: al inicio `epsilon=1.0` favorece la exploración de acciones nuevas y después decrece hasta el mínimo 0.05, aumentando la explotación de las mejores acciones aprendidas. Los empates entre acciones con máximo Q se resolvieron aleatoriamente para evitar sesgos fijos. La semilla utilizada fue 42.
+
+En la evaluación con epsilon=0 durante 100 episodios, la política alcanzó la meta en el 100% de los casos, con 6 pasos promedio y recompensa media 5.0. La trayectoria final fue `0 → 4 → 5 → 9 → 13 → 14 → 15`, con cinco recompensas de -1 y +10 al llegar. El comportamiento se estabiliza empíricamente: la política final conduce consistentemente a la meta y el número de pasos alcanza el recorrido mínimo, pero esto no constituye una afirmación de convergencia matemática estricta.
+
+El ejemplo es pedagógico y tiene limitaciones: la cuadrícula es pequeña, las transiciones son deterministas, las recompensas se diseñaron manualmente y una Q-table no escala bien a espacios de estados grandes. No representa un problema bancario o de producción real; sirve para ilustrar estado, acción, recompensa, exploración, explotación, política y actualización de valores Q.
+
+### Respuesta académica
+
+Se implementó un entorno Gridworld 4x4 donde un agente aprende a desplazarse desde un estado inicial hasta una meta. Cada posición representa un estado y las acciones posibles son arriba, derecha, abajo e izquierda. El agente recibe una recompensa negativa por cada paso y una positiva al alcanzar la meta. La política se aprende mediante Q-learning utilizando epsilon-greedy, que inicialmente favorece la exploración y progresivamente aumenta la explotación de las acciones con mayor valor Q. Tras 2000 episodios, la política alcanzó la meta en el 100% de 100 evaluaciones, en 6 pasos promedio y con recompensa media 5.0.

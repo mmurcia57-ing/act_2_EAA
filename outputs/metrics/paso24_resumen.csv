@@ -1,0 +1,2 @@
+n_states,n_actions,episodes,alpha,gamma,epsilon_start,epsilon_min,epsilon_decay,success_rate_eval,mean_steps_eval,mean_reward_eval,final_epsilon,random_state
+16,4,2000,0.1,0.95,1.0,0.05,0.995,1.0,6.0,5.0,0.05,42
