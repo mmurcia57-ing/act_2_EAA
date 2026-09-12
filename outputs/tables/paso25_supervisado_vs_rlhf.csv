@@ -1,0 +1,7 @@
+aspecto,supervisado,rlhf
+tipo de señal,etiquetas o respuestas objetivo,preferencias humanas y señal de recompensa
+objetivo,ajustar una salida a una referencia,optimizar comportamiento preferido
+datos,pares entrada-salida,"comparaciones, rankings u otras señales"
+feedback,generalmente incorporado como etiqueta,evaluación humana explícita o indirecta
+uso típico,predicción y clasificación,alineación de políticas o modelos
+limitaciones,coste y rigidez de etiquetas,"sesgos, inconsistencias y reward hacking"

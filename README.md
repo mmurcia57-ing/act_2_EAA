@@ -92,3 +92,7 @@ Se evaluó Isolation Forest para detectar anomalías estructurales y se caracter
 ## Paso 24
 
 Se implementó Q-learning en un Gridworld 4x4 y se generaron la Q-table, la política final, la trayectoria y las métricas de evaluación. El siguiente paso será una explicación conceptual de RLHF.
+
+## Paso 25
+
+Se analizó RLHF conceptualmente y se relacionó con el Q-learning del Paso 24. No se implementó RLHF real ni se entrenaron modelos. El siguiente paso será el cierre global.

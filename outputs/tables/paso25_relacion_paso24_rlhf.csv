@@ -1,0 +1,9 @@
+concepto,paso24_qlearning,rlhf
+agente,agente en Gridworld,modelo generativo
+entorno,cuadrícula 4x4 determinista,contexto de interacción y distribución de tareas
+estado,posición actual,prompt + conversación
+accion,movimiento discreto,"token, secuencia o respuesta"
+recompensa,-1 por paso y +10 en la meta,señal influenciada por preferencias humanas
+politica,tabla de acciones con mayor Q,modelo que selecciona respuestas
+exploracion,epsilon-greedy,"búsqueda de comportamientos y evaluación de alternativas, de forma conceptual"
+objetivo,llegar a la meta con pocos pasos,producir respuestas útiles y preferidas

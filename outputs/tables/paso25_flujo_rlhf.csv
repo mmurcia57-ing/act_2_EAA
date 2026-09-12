@@ -1,0 +1,7 @@
+etapa,descripcion,entrada,salida
+1,modelo base,modelo preentrenado,modelo inicial
+2,generación de respuestas,prompts/contextos,respuestas candidatas
+3,evaluación/preferencias humanas,pares o listas de respuestas,preferencias o rankings
+4,entrenamiento de modelo de recompensa,preferencias humanas,reward model
+5,optimización de política,modelo base y reward model,política ajustada
+6,evaluación/alineación,política y criterios de evaluación,modelo evaluado y posibles iteraciones

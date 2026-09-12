@@ -1,0 +1,12 @@
+aspecto,q_learning,rlhf
+objetivo,aprender valores de acción para alcanzar una meta,optimizar el comportamiento según preferencias humanas
+tipo_recompensa,numérica y definida por reglas,señal aprendida o derivada de preferencias
+fuente_recompensa,diseñador del entorno,"evaluadores humanos, directa o indirectamente"
+estado,posición del agente en el Gridworld,"contexto, prompt y conversación"
+accion,"arriba, derecha, abajo o izquierda","token, secuencia o respuesta generada"
+politica,acción con mayor valor Q en cada estado,modelo que decide qué respuesta producir
+aprendizaje,actualización de Q-table por experiencia,preferencias → reward model → optimización de política
+retroalimentacion_humana,no utilizada,"comparaciones, rankings, puntuaciones, correcciones o demostraciones, según el sistema"
+escala,entorno pequeño y explícito,modelos y datos potencialmente mucho más grandes
+casos_de_uso,control y navegación en entornos discretos,alineación y utilidad de modelos generativos
+riesgos,exploración ineficiente y Q-table poco escalable,"sesgo, reward hacking, errores del reward model y sobreoptimización"
