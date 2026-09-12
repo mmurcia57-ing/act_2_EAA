@@ -1,0 +1,3 @@
+modelo,ccp_alpha,node_count,max_depth,n_leaves
+arbol_sin_poda,0.0,2245,24,1123
+arbol_podado,6135101.075147216,127,9,64

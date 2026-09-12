@@ -32,3 +32,6 @@ Se trataron los missing y está disponible el dataset derivado imputado en `outp
 ## Paso 07
 
 Se entrenó el primer modelo supervisado: un árbol de regresión baseline con preprocesamiento dentro de un pipeline sin leakage. La poda aún no se ha realizado.
+## Paso 08
+
+Se evaluó la poda del árbol de regresión y se comparó contra el baseline y la referencia del profesor. Random Forest todavía no se ha ejecutado.

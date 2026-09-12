@@ -1,0 +1,3 @@
+modelo,rmse_dataset,rmse_profesor,diferencia_absoluta,diferencia_pct,comentario
+arbol_sin_poda,42453.07396545554,41002.2,1450.8739654555393,3.538527116729198,diferencia documentada; no se forzaron parámetros
+arbol_podado,40386.26853111337,42927.25,2540.981468886632,5.919273815319247,diferencia documentada; alpha elegido con validación interna

@@ -148,3 +148,24 @@ El árbol produjo 2245 nodos, profundidad máxima 24 y 1123 hojas. En train el R
 El árbol de decisión sin podar obtuvo un RMSE de 42453.07. La referencia proporcionada por el profesor es 41002.2; el valor del dataset es 1450.87 mayor, una diferencia de 3.54%, y no se forzó coincidencia.
 
 Un árbol sin restricciones puede ajustarse fuertemente al conjunto de entrenamiento, por lo que la diferencia entre el error de entrenamiento y de prueba permite evaluar indicios de sobreajuste. En el siguiente paso se evaluará la poda y se comprobará empíricamente si simplificar el árbol mejora o empeora su capacidad de generalización.
+## Paso 08 - Poda del árbol de regresión
+
+### Metodología
+
+La poda reduce ramas de un árbol para controlar su complejidad y disminuir el riesgo de sobreajuste. Se usó cost-complexity pruning: `ccp_alpha` penaliza la complejidad del árbol, de modo que valores mayores producen árboles más simples. Se recreó el split externo de los pasos anteriores (1168 train y 292 test), usando `data/housing_train.csv` y el mismo pipeline de imputación y OneHotEncoder.
+
+El camino de poda se calculó solo sobre los datos de entrenamiento. Para elegir `ccp_alpha` se dividió `X_train` en train interno y validación interna, ambos con `random_state=42`; el test externo no participó en la selección. Se evaluaron 40 candidatos reproducibles y se eligió el alpha con menor RMSE de validación, con preferencia por el árbol más simple en caso de empate.
+
+### Resultados
+
+El RMSE baseline sin poda se reprodujo como 42453.07. El alpha seleccionado fue 6135101.075147216. El árbol podado obtuvo RMSE train 19979.70, RMSE test 40386.27, MAE test 25776.51 y R² test 0.7874.
+
+La complejidad se redujo de 2245 a 127 nodos, de profundidad 24 a 9 y de 1123 a 64 hojas. El RMSE test disminuyó en 2066.81 (4.87%) respecto al baseline, por lo que en este experimento la poda mejoró la generalización. La brecha train-test pasó de 42453.07 a 20406.57, aunque el RMSE train sigue siendo menor que el de test.
+
+Frente a la referencia del profesor, el baseline difiere en 1450.87 (3.54%) respecto a 41002.2 y el árbol podado difiere en 2540.98 (5.92%) respecto a 42927.25. En la referencia del profesor, 41002.2 pasa a 42927.25: la poda empeora aproximadamente 1925.05 (4.70%). No se reprodujo artificialmente ese comportamiento; se respetó el alpha seleccionado por validación interna en este dataset y pipeline.
+
+### Respuesta académica
+
+Una menor complejidad no garantiza automáticamente un menor error de test. Si el RMSE podado aumenta, la poda pudo ser demasiado agresiva o eliminar divisiones útiles, introduciendo mayor sesgo y posible underfitting. Si disminuye, como en nuestro resultado, la poda redujo parte del sobreajuste y mejoró la generalización. La decisión debe basarse en validación y test, no en asumir que podar siempre mejora.
+
+El árbol sin poda obtuvo RMSE 42453.07 y el podado 40386.27, por lo que la poda mejoró en este experimento. La referencia del profesor muestra el caso contrario (41002.2 a 42927.25); esa diferencia confirma que el efecto depende de los datos, el preprocesamiento, la selección de alpha y la evaluación. Todavía no se ha ejecutado Random Forest ni se avanza al Paso 09.

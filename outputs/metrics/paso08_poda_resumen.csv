@@ -1,0 +1,2 @@
+rmse_baseline,rmse_podado,mae_baseline,mae_podado,r2_baseline,r2_podado,rmse_train_baseline,rmse_train_podado,alpha_seleccionado,nodes_baseline,nodes_podado,depth_baseline,depth_podado,leaves_baseline,leaves_podado,delta_rmse,delta_rmse_pct
+42453.07396545554,40386.26853111337,27494.575342465752,25776.50723382821,0.7650343100887013,0.787355760131962,0.0,19979.697658260215,6135101.075147216,2245,127,24,9,1123,64,-2066.805434342168,-4.868447067046186
