@@ -1,0 +1,3 @@
+variable,rol,decision_preliminar,justificacion
+Id,identificador,excluir de modelado,"identificador único, no magnitud del inmueble"
+SalePrice,target,no usar como predictor,variable objetivo

@@ -14,3 +14,6 @@ Dataset: `housing_train.csv`, referencia [USA Housing Dataset en Kaggle](https:/
 .\.venv\Scripts\Activate.ps1
 & .\.venv\Scripts\python.exe src\paso01_validar_dataset.py
 ```
+## Paso 02
+
+La inspección estructural fue ejecutada. Sus tablas, métricas y el histograma se encuentran en `outputs/tables/`, `outputs/metrics/` y `outputs/figures/`. Todavía no se ha realizado imputación, encoding ni modelado.
