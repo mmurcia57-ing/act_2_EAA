@@ -1,0 +1,10 @@
+limitacion
+dataset relativamente pequeño y único
+split único en modelos supervisados
+grupo3 extremadamente pequeño
+tuning limitado y sin validación cruzada exhaustiva
+silhouette bajo y separación limitada
+sin ground truth de anomalías
+entorno Q-learning artificial
+RLHF tratado solo conceptualmente
+resultados no deben generalizarse sin validación externa

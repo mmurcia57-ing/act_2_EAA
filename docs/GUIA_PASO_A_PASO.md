@@ -556,3 +556,23 @@ Reward hacking ocurre cuando el agente maximiza la señal de recompensa sin alca
 En Q-learning la función de recompensa está definida explícitamente por el diseñador del entorno; en el experimento desarrollado, el agente recibe -1 por cada paso y +10 al alcanzar la meta. RLHF introduce una diferencia importante: la señal que orienta el comportamiento puede derivarse de preferencias humanas. En un flujo clásico, los humanos comparan respuestas, esas preferencias se utilizan para entrenar un modelo de recompensa y posteriormente se optimiza una política para obtener comportamientos con mayor recompensa esperada. Esta estrategia permite optimizar criterios difíciles de expresar mediante reglas matemáticas, aunque introduce sesgos, inconsistencias, reward hacking y dependencia de la calidad del feedback.
 
 RLHF no significa que la inteligencia humana se transfiera directamente al modelo. Las preferencias humanas pueden ser imperfectas, el reward model también puede equivocarse y la alineación no es una garantía absoluta de comportamiento correcto. Este Paso 25 es conceptual: no se implementó RLHF real, no se entrenó ningún modelo y no se utilizó feedback humano real.
+
+## Paso 26 - Conclusiones globales del laboratorio
+
+El laboratorio integró análisis exploratorio, tratamiento de valores faltantes, regresión, clasificación, clustering, detección de anomalías, Q-learning y una reflexión conceptual sobre RLHF. El dataset contiene 1460 viviendas y el preprocesamiento se mantuvo reproducible, evitando target leakage: en supervisado se separó antes de imputar o escalar, y `SalePrice` se excluyó del clustering y de Isolation Forest.
+
+En regresión, XGBoost fue el mejor modelo bajo el split y configuración evaluados, con RMSE 25564.80, MAE 15852.43 y R2 0.9148. Random Forest alcanzó RMSE 28929.45 y R2 0.8909; la MLP obtuvo RMSE 29390.27 y R2 0.8874; el árbol podado alcanzó RMSE 40386.27 y R2 0.7874. La selección depende de la métrica y no implica generalización fuera de este dataset.
+
+En clasificación, XGBoost obtuvo la mayor accuracy (0.9623), pero SVM lineal con C=1 logró la mejor balanced accuracy (0.7916) y macro F1 (0.8015). El fuerte desbalance —grupo2 representa 1328 de 1460 viviendas— hace insuficiente observar solo accuracy. Grupo3 tiene 9 casos, con 7 en train y 2 en test; SVM identificó 1 de 2, pero esto no es evidencia robusta de que resuelva la clase.
+
+En clustering, K=2 fue seleccionado por silhouette. K-Means obtuvo 0.1424 y el jerárquico Ward 0.1150, con ARI 0.5735 entre ambos. Los métodos detectaron un eje estructural relacionado con antigüedad, calidad, tamaño y garaje, aunque la separación es limitada y los clusters son exploratorios. La relación descriptiva con `SalePrice` no implica causalidad.
+
+Isolation Forest identificó 70 viviendas atípicas (4.79%), diferenciadas principalmente por `GrLivArea`, `TotRmsAbvGrd`, `KitchenAbvGr`, `LotArea`, `1stFlrSF`, `2ndFlrSF`, `TotalBsmtSF`, `LowQualFinSF`, `FullBath` y `BedroomAbvGr`. Una anomalía es un caso inusual que requiere análisis adicional, no una prueba de fraude.
+
+Q-learning aprendió empíricamente una política eficiente en un Gridworld 4x4: obtuvo 100% de éxito, 6 pasos promedio y recompensa media 5. RLHF se estudió conceptualmente para contrastar una recompensa fija diseñada por el entorno con señales derivadas de preferencias humanas; no se implementó un sistema RLHF real.
+
+Las limitaciones globales incluyen un dataset único y relativamente pequeño, un solo split supervisado, tuning limitado, ausencia de validación cruzada exhaustiva, grupo3 reducido, silhouette bajo, ausencia de ground truth de anomalías, entorno de RL artificial y RLHF conceptual. Los resultados requieren validación adicional antes de generalizarse.
+
+### Conclusión general y aprendizajes
+
+No existe un único algoritmo superior para todos los problemas. El desempeño depende del objetivo, la métrica y las características de los datos. XGBoost presentó el menor error en regresión; en clasificación, el desbalance hizo necesario complementar accuracy con balanced accuracy y macro F1, donde SVM fue más equilibrado. Los métodos no supervisados identificaron estructura y anomalías sin etiquetas, aunque con separación y validación limitadas. Q-learning mostró cómo una recompensa programada produce una política en un entorno simple, mientras RLHF permitió contrastarla con señales derivadas de preferencias humanas.

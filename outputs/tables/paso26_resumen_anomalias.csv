@@ -1,0 +1,2 @@
+n_rows,n_features,n_estimators,contamination,n_normal,n_anomalies,pct_anomaly,random_state
+1460,36,300,auto,1390,70,4.794520547945205,42

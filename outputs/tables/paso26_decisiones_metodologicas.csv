@@ -1,0 +1,10 @@
+decision_metodologica
+evitar target leakage
+split antes de imputar/escalar en supervisado
+SalePrice fuera de clustering
+SalePrice fuera de Isolation Forest
+StandardScaler para SVM y clustering
+no usar accuracy sola con desbalance
+no interpretar clusters como clases
+no interpretar anomalías como fraude
+no presentar RLHF conceptual como implementación real

@@ -1,0 +1,3 @@
+metodo,k,silhouette,perfil_bajo,perfil_alto,ARI_kmeans_vs_jerarquico
+K-Means,2,0.1423765710313655,769,691,0.5735140574296844
+Jerárquico Ward,2,0.1150338267045204,904,556,0.5735140574296844

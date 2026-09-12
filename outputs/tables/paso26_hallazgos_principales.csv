@@ -1,0 +1,9 @@
+area,hallazgo,evidencia,implicacion
+EDA,"Dataset de housing con 1460 filas y 81 columnas; se revisaron estructura, tipos, faltantes y relaciones.",outputs/tables/paso02_* y paso03_*,La inspección inicial orientó el modelado
+missing,Se documentaron faltantes y se imputaron dentro de pipelines o con reglas reproducibles.,outputs/tables/paso06_*,Se evitó leakage en supervisado
+regresión,XGBoost obtuvo RMSE 25564.80 y R2 0.9148.,paso26_resumen_regresion.csv,Mejor desempeño predictivo bajo este split
+clasificación,XGBoost tuvo mayor accuracy; SVM C=1 mayor balanced accuracy 0.7916 y macro F1 0.8015.,paso26_resumen_clasificacion.csv,El desbalance exige métricas complementarias
+clustering,K=2; K-Means silhouette 0.1424 y jerárquico 0.1150; ARI 0.5735.,paso26_resumen_clustering.csv,Estructura exploratoria y separación limitada
+anomalías,Isolation Forest detectó 70 anomalías (4.79%).,paso26_resumen_anomalias.csv,"Casos estructuralmente inusuales, no fraude"
+reinforcement_learning,"Q-learning logró 100% de éxito, 6 pasos y recompensa media 5.",paso26_resumen_qlearning.csv,Política eficiente en Gridworld simple
+RLHF,Se analizó conceptualmente; no hubo implementación real.,paso26_resumen_rlhf.csv,La recompensa puede derivarse de preferencias humanas

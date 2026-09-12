@@ -1,0 +1,2 @@
+tipo_paso,implementacion_real_rlhf,usa_modelo_recompensa_real,usa_feedback_humano_real,relacion_paso24,principal_diferencia,principal_beneficio,principal_riesgo
+conceptual,no,no,no,Q-learning usa recompensa fija; RLHF deriva la señal de preferencias humanas,origen de la señal de recompensa,incorporar criterios cualitativos difíciles de programar,optimizar una señal imperfecta y producir reward hacking

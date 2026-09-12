@@ -1,0 +1,7 @@
+seccion,prioridad,figura_recomendada,tabla_recomendada,nota
+metodología,alta,paso26_mapa_tecnicas.png,paso26_decisiones_metodologicas.csv,Presentar el flujo y decisiones contra leakage
+regresión,alta,paso26_resumen_regresion.png,paso26_resumen_regresion.csv,Comparar RMSE y R2
+clasificación,alta,paso26_resumen_clasificacion.png,paso26_resumen_clasificacion.csv,Priorizar balanced accuracy y macro F1
+clustering,media,—,paso26_resumen_clustering.csv,Reportar silhouette y ARI
+anomalías/RL/RLHF,media,—,paso26_resumen_anomalias.csv; paso26_resumen_qlearning.csv; paso26_resumen_rlhf.csv,Sintetizar sin sobrecargar el informe
+limitaciones,alta,—,paso26_limitaciones.csv,Cerrar con alcance y generalización

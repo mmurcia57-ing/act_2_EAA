@@ -96,3 +96,7 @@ Se implementó Q-learning en un Gridworld 4x4 y se generaron la Q-table, la pol�
 ## Paso 25
 
 Se analizó RLHF conceptualmente y se relacionó con el Q-learning del Paso 24. No se implementó RLHF real ni se entrenaron modelos. El siguiente paso será el cierre global.
+
+## Paso 26
+
+Se consolidaron las conclusiones globales del laboratorio, la evidencia de la rúbrica, las limitaciones y la prioridad de contenidos para un informe de 25 páginas. El siguiente paso será la entrega final.

@@ -1,0 +1,10 @@
+criterio,cubierto,evidencia,paso
+EDA,si,"inspección estructural, estadística y correlaciones",02-05
+missing,si,tratamiento e imputación documentados,06
+regresión tree/RF/boosting/NN,si,"métricas de árbol, RF, XGBoost y MLP",07-12
+clasificación tree/RF/boosting/SVM,si,comparación final de cuatro modelos,14-18
+clustering,si,K-Means y jerárquico con silhouette/ARI,19-22
+anomalías,si,Isolation Forest y perfiles,23
+RL,si,Q-learning Gridworld y evaluación,24
+RLHF,si,reflexión conceptual y tablas,25
+comentarios/documentación,si,guía paso a paso y README,01-26
