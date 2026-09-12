@@ -108,6 +108,11 @@ def main() -> None:
         remaining = df.columns[df.isna().any()].tolist()
         raise RuntimeError(f"Quedan missing después de imputar: {remaining}")
     df.to_csv(tables / "housing_train_imputado.csv", index=False)
+    # La categoría explícita "None" es un token NA por defecto en pandas.
+    # Se valida el CSV derivado conservando esos tokens como texto.
+    roundtrip = pd.read_csv(tables / "housing_train_imputado.csv", keep_default_na=False)
+    if int(roundtrip.isna().sum().sum()) != 0 or roundtrip.shape != df.shape:
+        raise RuntimeError("El CSV derivado no conserva shape o ausencia total de missing")
 
     comparison = strategy_table[["variable", "missing_count", "estrategia", "valor_imputacion"]].rename(columns={"missing_count": "missing_antes"})
     comparison["missing_despues"] = [int(df[column].isna().sum()) for column in comparison["variable"]]
